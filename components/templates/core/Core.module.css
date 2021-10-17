@@ -21,7 +21,7 @@
   border-bottom: 1px solid lightgray;
   object-fit: contain;
   display: flex;
-  z-index: 1;
+  z-index: 0;
   justify-content: space-between;
 }
 .core_btnModal {

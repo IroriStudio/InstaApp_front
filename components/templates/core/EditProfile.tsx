@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "../../stores";
+import { AppDispatch } from "../../../stores";
 import styles from "./Core.module.css";
 import Modal from "react-modal";
 import {
-  editNickname,
   fetchAsyncUpdateProf,
   fetchCredEnd,
   fetchCredStart,
   resetOpenProfile,
   selectOpenProfile,
   selectProfile,
-} from "../../stores/slices/authSlice";
+} from "../../../stores/slices/authSlice";
 import { File } from "../types";
 import ReactModal from "react-modal";
 import { Button, IconButton, TextField } from "@material-ui/core";
 import { MdAddAPhoto } from "react-icons/md";
-import { resetOpenNewPost } from "../../stores/slices/postSlice";
+import { resetOpenNewPost } from "../../../stores/slices/postSlice";
 const customStyles = {
   content: {
     top: "55%",

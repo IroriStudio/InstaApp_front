@@ -19,6 +19,7 @@
   color: rgb(6, 153, 211);
   text-align: center;
   cursor: pointer;
+  font-size: 12px;
 }
 .auth_progress {
   margin-top: 15px;

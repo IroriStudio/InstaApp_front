@@ -3,14 +3,14 @@ import React, { useState } from "react";
 import { MdAddAPhoto } from "react-icons/md";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "../../stores";
+import { AppDispatch } from "../../../stores";
 import {
   fetchAsyncNewPost,
   fetchPostEnd,
   fetchPostStart,
   resetOpenNewPost,
   selectOpenNewPost,
-} from "../../stores/slices/postSlice";
+} from "../../../stores/slices/postSlice";
 import { File } from "../types";
 import styles from "./Core.module.css";
 

@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "../../stores";
+import { AppDispatch } from "../../../stores";
 import styles from "./Post.module.css";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { PROPS_POST } from "../types";
-import { selectProfiles } from "../../stores/slices/authSlice";
+import { selectProfiles } from "../../../stores/slices/authSlice";
 import {
   fetchAsyncPatchLiked,
   fetchAsyncPostComment,
   fetchPostEnd,
   fetchPostStart,
   selectComments,
-} from "../../stores/slices/postSlice";
+} from "../../../stores/slices/postSlice";
 import { Avatar, Checkbox } from "@material-ui/core";
 import { Favorite, FavoriteBorder } from "@material-ui/icons";
 import { AvatarGroup } from "@material-ui/lab";

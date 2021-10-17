@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Auth from "../auth/Auth";
+import Auth from "../../organisms/AuthModal";
 import styles from "./Core.module.css";
 import { withStyles } from "@material-ui/core/styles";
 import { MdAddAPhoto } from "react-icons/md";
@@ -16,14 +16,13 @@ import {
   fetchAsyncGetMyProf,
   fetchAsyncGetProfs,
   resetOpenProfile,
-  resetOpenSignIn,
-  resetOpenSignUp,
   selectIsLoadingAuth,
   selectProfile,
   setOpenProfile,
-  setOpenSignIn,
-  setOpenSignUp,
-} from "../../stores/slices/authSlice";
+  setAuthModal,
+  selectIsOpenAuthModal,
+  selectAuthMode,
+} from "../../../stores/slices/authSlice";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -33,12 +32,12 @@ import {
   selectIsLoadingPost,
   selectPosts,
   setOpenNewPost,
-} from "../../stores/slices/postSlice";
+} from "../../../stores/slices/postSlice";
 
-import { AppDispatch } from "../../stores";
 import Post from "../post/Post";
 import EditProfile from "./EditProfile";
 import NewPost from "./NewPost";
+import { AppDispatch } from "../../../stores";
 
 const StyledBadge = withStyles((theme) => ({
   badge: {
@@ -75,14 +74,16 @@ const Core: React.FC = () => {
   const posts = useSelector(selectPosts);
   const isLoadingPost = useSelector(selectIsLoadingPost);
   const isLoadingAuth = useSelector(selectIsLoadingAuth);
+  const isOpenAuthModal = useSelector(selectIsOpenAuthModal);
+  const isAuthMode = useSelector(selectAuthMode);
 
   useEffect(() => {
     const fetchBootLoader = async () => {
       if (localStorage.localJWT) {
-        dispatch(resetOpenSignIn());
+        dispatch(setAuthModal(false));
         const result = await dispatch(fetchAsyncGetMyProf());
         if (fetchAsyncGetMyProf.rejected.match(result)) {
-          dispatch(setOpenSignIn());
+          dispatch(setAuthModal(true));
           return;
         }
         await dispatch(fetchAsyncGetPosts());
@@ -92,6 +93,7 @@ const Core: React.FC = () => {
     };
     fetchBootLoader();
   }, [dispatch]);
+
   return (
     <div>
       <Auth />
@@ -118,7 +120,7 @@ const Core: React.FC = () => {
                   dispatch(editNickname(""));
                   dispatch(resetOpenProfile());
                   dispatch(resetOpenNewPost());
-                  dispatch(setOpenSignIn());
+                  dispatch(setAuthModal(true));
                 }}
               >
                 Logout
@@ -140,26 +142,7 @@ const Core: React.FC = () => {
               </button>
             </div>
           </>
-        ) : (
-          <div>
-            <Button
-              onClick={() => {
-                dispatch(setOpenSignIn());
-                dispatch(resetOpenSignUp());
-              }}
-            >
-              LogIn
-            </Button>
-            <Button
-              onClick={() => {
-                dispatch(setOpenSignUp());
-                dispatch(resetOpenSignIn());
-              }}
-            >
-              Sign Up
-            </Button>
-          </div>
-        )}
+        ) : null}
       </div>
       {profile?.nickName && (
         <>

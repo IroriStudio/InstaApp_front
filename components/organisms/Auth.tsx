@@ -3,23 +3,16 @@ import styles from "./Auth.module.css";
 import Modal from "react-modal";
 import { Formik } from "formik";
 import { object, string } from "yup";
-
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectIsLoadingAuth,
-  selectOpenSignIn,
-  selectOpenSignUp,
-  setOpenSignIn,
-  resetOpenSignIn,
-  setOpenSignUp,
-  resetOpenSignUp,
   fetchCredStart,
   fetchCredEnd,
-  fetchAsyncRegister,
   fetchAsyncGetMyProf,
   fetchAsyncGetProfs,
-  fetchAsyncCreateProf,
   fetchAsyncLogin,
+  fetchAsyncRegister,
+  fetchAsyncCreateProf,
 } from "../../stores/slices/authSlice";
 import { AppDispatch } from "../../stores";
 import { Button, CircularProgress, TextField } from "@material-ui/core";
@@ -27,6 +20,8 @@ import {
   fetchAsyncGetComments,
   fetchAsyncGetPosts,
 } from "../../stores/slices/postSlice";
+import AuthTextField from "../atoms/AuthTextField";
+import AuthModal from "./AuthModal";
 
 const customStyles = {
   overlay: {
@@ -44,14 +39,12 @@ const customStyles = {
   },
 };
 const Auth: React.FC = () => {
-  Modal.setAppElement("#__next");
-  const openSignIn = useSelector(selectOpenSignIn);
-  const openSignUp = useSelector(selectOpenSignUp);
   const isLoadingAuth = useSelector(selectIsLoadingAuth);
   const dispatch: AppDispatch = useDispatch();
   return (
     <>
-      <Modal
+      <AuthModal />
+      {/* <Modal
         isOpen={openSignUp}
         onRequestClose={() => dispatch(resetOpenSignUp)}
         style={customStyles}
@@ -66,7 +59,6 @@ const Auth: React.FC = () => {
             if (fetchAsyncRegister.fulfilled.match(resultReg)) {
               await dispatch(fetchAsyncLogin(values));
               await dispatch(fetchAsyncCreateProf({ nickName: "anonymous" }));
-
               await dispatch(fetchAsyncGetProfs());
               await dispatch(fetchAsyncGetPosts());
               await dispatch(fetchAsyncGetComments());
@@ -249,7 +241,7 @@ const Auth: React.FC = () => {
             </div>
           )}
         </Formik>
-      </Modal>
+      </Modal> */}
     </>
   );
 };

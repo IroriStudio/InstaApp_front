@@ -1,7 +1,9 @@
 import Link from "next/link";
+import React from "react";
 import { Provider } from "react-redux";
 import Layout from "../components/Layout";
-import Core from "../features/core/Core";
+import Core from "../components/templates/core/Core";
+
 import { store } from "../stores";
 import styles from "./index.module.css";
 

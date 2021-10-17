@@ -2,12 +2,11 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 import { RootState } from "..";
-
 import {
   PROPS_AUTHEN,
   PROPS_NICKNAME,
   PROPS_PROFILE,
-} from "../../features/types";
+} from "../../components/templates/types";
 
 const apiUrl = process.env.NEXT_PUBLIC_DEV_API_URL;
 
@@ -19,6 +18,7 @@ export const fetchAsyncLogin = createAsyncThunk(
         "Content-Type": "application/json",
       },
     });
+
     return res.data;
   }
 );
@@ -85,8 +85,8 @@ export const fetchAsyncGetProfs = createAsyncThunk("profiles/get", async () => {
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
-    openSignIn: true,
-    openSignUp: false,
+    isOpenAuthModal: true,
+    authMode: "login",
     openProfile: false,
     isLoadingAuth: false,
     myprofile: {
@@ -105,7 +105,7 @@ export const authSlice = createSlice({
         img: "",
       },
     ],
-  },
+  } as any,
   reducers: {
     fetchCredStart(state) {
       state.isLoadingAuth = true;
@@ -113,18 +113,13 @@ export const authSlice = createSlice({
     fetchCredEnd(state) {
       state.isLoadingAuth = false;
     },
-    setOpenSignIn(state) {
-      state.openSignIn = true;
+    setAuthModal(state, action) {
+      state.isOpenAuthModal = action.payload;
     },
-    resetOpenSignIn(state) {
-      state.openSignIn = false;
+    changeAuthMode(state, action) {
+      state.authMode = action.payload;
     },
-    setOpenSignUp(state) {
-      state.openSignUp = true;
-    },
-    resetOpenSignUp(state) {
-      state.openSignUp = false;
-    },
+
     setOpenProfile(state) {
       state.openProfile = true;
     },
@@ -161,10 +156,8 @@ export const authSlice = createSlice({
 export const {
   fetchCredStart,
   fetchCredEnd,
-  setOpenSignIn,
-  resetOpenSignIn,
-  setOpenSignUp,
-  resetOpenSignUp,
+  setAuthModal,
+  changeAuthMode,
   setOpenProfile,
   resetOpenProfile,
   editNickname,
@@ -172,8 +165,10 @@ export const {
 
 export const selectIsLoadingAuth = (state: RootState) =>
   state.auth.isLoadingAuth;
-export const selectOpenSignIn = (state: RootState) => state.auth.openSignIn;
-export const selectOpenSignUp = (state: RootState) => state.auth.openSignUp;
+export const selectIsOpenAuthModal = (state: RootState) =>
+  state.auth.isOpenAuthModal;
+export const selectAuthMode = (state: RootState) => state.auth.authMode;
+
 export const selectOpenProfile = (state: RootState) => state.auth.openProfile;
 export const selectProfile = (state: RootState) => state.auth.myprofile;
 export const selectProfiles = (state: RootState) => state.auth.profiles;
