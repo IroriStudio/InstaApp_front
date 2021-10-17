@@ -1,15 +1,16 @@
-import Link from 'next/link'
-import Layout from '../components/Layout'
+import Link from "next/link";
+import { Provider } from "react-redux";
+import Layout from "../components/Layout";
+import Core from "../features/core/Core";
+import { store } from "../stores";
+import styles from "./index.module.css";
 
 const IndexPage = () => (
-  <Layout title="Home | Next.js + TypeScript Example">
-    <h1>Hello Next.js 👋</h1>
-    <p>
-      <Link href="/about">
-        <a>About</a>
-      </Link>
-    </p>
-  </Layout>
-)
+  <Provider store={store}>
+    <div className={styles.app}>
+      <Core />
+    </div>
+  </Provider>
+);
 
-export default IndexPage
+export default IndexPage;

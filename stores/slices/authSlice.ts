@@ -1,14 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { profile } from "console";
-import { PROPS_AUTHEN, PROPS_NICKNAME, PROPS_PROFILE } from "../types";
+
+import { RootState } from "..";
+
+import {
+  PROPS_AUTHEN,
+  PROPS_NICKNAME,
+  PROPS_PROFILE,
+} from "../../features/types";
 
 const apiUrl = process.env.NEXT_PUBLIC_DEV_API_URL;
 
 export const fetchAsyncLogin = createAsyncThunk(
   "auth/post",
   async (authen: PROPS_AUTHEN) => {
-    const res = await axios.post(`${apiUrl}authen/jwt/create`, authen, {
+    const res = await axios.post(`${apiUrl}authen/jwt/create/`, authen, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -34,10 +40,10 @@ export const fetchAsyncCreateProf = createAsyncThunk(
   async (nickName: PROPS_NICKNAME) => {
     const res = await axios.post(`${apiUrl}api/profile/`, nickName, {
       headers: {
-        "Content-Type": "application/json",
         Authorization: `JWT ${localStorage.localJWT}`,
       },
     });
+
     return res.data;
   }
 );
@@ -52,7 +58,6 @@ export const fetchAsyncUpdateProf = createAsyncThunk(
       uploadData,
       {
         headers: {
-          "Content-Type": "application/json",
           Authorization: `JWT ${localStorage.localJWT}`,
         },
       }
@@ -61,17 +66,19 @@ export const fetchAsyncUpdateProf = createAsyncThunk(
   }
 );
 
-export const fetchAsyncMyProf = createAsyncThunk("profile/get", async () => {
+export const fetchAsyncGetMyProf = createAsyncThunk("profile/get", async () => {
   const res = await axios.get(`${apiUrl}api/myprofile/`, {
     headers: { Authorization: `JWT ${localStorage.localJWT}` },
   });
-  return res.data;
+
+  return res.data[0];
 });
 
 export const fetchAsyncGetProfs = createAsyncThunk("profiles/get", async () => {
   const res = await axios.get(`${apiUrl}api/profile/`, {
     headers: { Authorization: `JWT ${localStorage.localJWT}` },
   });
+
   return res.data;
 });
 
@@ -79,14 +86,14 @@ export const authSlice = createSlice({
   name: "auth",
   initialState: {
     openSignIn: true,
-    openSignUp: true,
+    openSignUp: false,
     openProfile: false,
     isLoadingAuth: false,
-    myProfile: {
+    myprofile: {
       id: 0,
       nickName: "",
       userProfile: 0,
-      created_at: "",
+      created_on: "",
       img: "",
     },
     profiles: [
@@ -94,7 +101,7 @@ export const authSlice = createSlice({
         id: 0,
         nickName: "",
         userProfile: 0,
-        created_at: "",
+        created_on: "",
         img: "",
       },
     ],
@@ -125,8 +132,29 @@ export const authSlice = createSlice({
       state.openProfile = false;
     },
     editNickname(state, action) {
-      state.myProfile.nickName = action.payload;
+      state.myprofile.nickName = action.payload;
     },
+  },
+
+  extraReducers: (builder) => {
+    builder.addCase(fetchAsyncLogin.fulfilled, (state, action) => {
+      localStorage.setItem("localJWT", action.payload.access);
+    });
+    builder.addCase(fetchAsyncCreateProf.fulfilled, (state, action) => {
+      state.myprofile = action.payload;
+    });
+    builder.addCase(fetchAsyncGetMyProf.fulfilled, (state, action) => {
+      state.myprofile = action.payload;
+    });
+    builder.addCase(fetchAsyncGetProfs.fulfilled, (state, action) => {
+      state.profiles = action.payload;
+    });
+    builder.addCase(fetchAsyncUpdateProf.fulfilled, (state, action) => {
+      state.myprofile = action.payload;
+      state.profiles = state.profiles.map((profile) =>
+        profile.id === action.payload.id ? action.payload : profile
+      );
+    });
   },
 });
 
@@ -142,4 +170,11 @@ export const {
   editNickname,
 } = authSlice.actions;
 
+export const selectIsLoadingAuth = (state: RootState) =>
+  state.auth.isLoadingAuth;
+export const selectOpenSignIn = (state: RootState) => state.auth.openSignIn;
+export const selectOpenSignUp = (state: RootState) => state.auth.openSignUp;
+export const selectOpenProfile = (state: RootState) => state.auth.openProfile;
+export const selectProfile = (state: RootState) => state.auth.myprofile;
+export const selectProfiles = (state: RootState) => state.auth.profiles;
 export default authSlice.reducer;

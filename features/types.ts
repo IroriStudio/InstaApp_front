@@ -4,6 +4,22 @@ export interface File extends Blob {
 }
 
 // authSlice.ts
+
+export interface AUTH_SLICE_PROFILE {
+  id: number;
+  nickName: string;
+  userProfile: number;
+  created_on: string;
+  img: string;
+}
+export interface AUTH_SLICE_STATE {
+  openSignIn: boolean;
+  openSignUp: boolean;
+  openProfile: boolean;
+  isLoadingAuth: boolean;
+  myprofile: AUTH_SLICE_PROFILE;
+  profiles: AUTH_SLICE_PROFILE[];
+}
 export interface PROPS_AUTHEN {
   email: string;
   password: string;
@@ -16,4 +32,31 @@ export interface PROPS_PROFILE {
 
 export interface PROPS_NICKNAME {
   nickName: string;
+}
+
+//postSlice.ts
+export interface PROPS_NEWPOST {
+  title: string;
+  img: File | null;
+}
+
+export interface PROPS_LIKED {
+  id: number;
+  title: string;
+  current: number[];
+  new: number;
+}
+
+export interface PROPS_COMMENT {
+  text: string;
+  post: number;
+}
+
+export interface PROPS_POST {
+  postId: number;
+  loginId: number;
+  userPost: number;
+  title: string;
+  imageUrl: string;
+  liked: number[];
 }
