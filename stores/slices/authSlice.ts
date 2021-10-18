@@ -3,10 +3,11 @@ import axios from "axios";
 
 import { RootState } from "..";
 import {
+  AUTH_SLICE_STATE,
   PROPS_AUTHEN,
   PROPS_NICKNAME,
   PROPS_PROFILE,
-} from "../../components/templates/types";
+} from "../types";
 
 const apiUrl = process.env.NEXT_PUBLIC_DEV_API_URL;
 
@@ -105,7 +106,7 @@ export const authSlice = createSlice({
         img: "",
       },
     ],
-  } as any,
+  } as AUTH_SLICE_STATE,
   reducers: {
     fetchCredStart(state) {
       state.isLoadingAuth = true;

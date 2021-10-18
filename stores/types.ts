@@ -13,8 +13,8 @@ export interface AUTH_SLICE_PROFILE {
   img: string;
 }
 export interface AUTH_SLICE_STATE {
-  openSignIn: boolean;
-  openSignUp: boolean;
+  isOpenAuthModal: boolean;
+  authMode: "login" | "register";
   openProfile: boolean;
   isLoadingAuth: boolean;
   myprofile: AUTH_SLICE_PROFILE;
@@ -35,6 +35,12 @@ export interface PROPS_NICKNAME {
 }
 
 //postSlice.ts
+
+export interface POST_SLICE_STATE {
+  isLoadingPost: boolean;
+  openNewPost: boolean;
+}
+
 export interface PROPS_NEWPOST {
   title: string;
   img: File | null;

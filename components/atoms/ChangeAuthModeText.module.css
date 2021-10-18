@@ -1,0 +1,7 @@
+.change_auth_mode_text {
+  color: rgb(6, 153, 211);
+  text-align: center;
+  cursor: pointer;
+  font-size: 12px;
+  display: block;
+}

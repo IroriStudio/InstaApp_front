@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "../../../stores";
-import styles from "./Core.module.css";
+import { AppDispatch } from "../../stores";
 import Modal from "react-modal";
 import {
   fetchAsyncUpdateProf,
@@ -10,12 +9,12 @@ import {
   resetOpenProfile,
   selectOpenProfile,
   selectProfile,
-} from "../../../stores/slices/authSlice";
-import { File } from "../types";
+} from "../../stores/slices/authSlice";
+import { File } from "../../stores/types";
 import ReactModal from "react-modal";
 import { Button, IconButton, TextField } from "@material-ui/core";
 import { MdAddAPhoto } from "react-icons/md";
-import { resetOpenNewPost } from "../../../stores/slices/postSlice";
+import { resetOpenNewPost } from "../../stores/slices/postSlice";
 const customStyles = {
   content: {
     top: "55%",
@@ -45,7 +44,6 @@ const EditProfile: React.FC = () => {
     dispatch(resetOpenProfile());
   };
   const handlerEditPicture = () => {
-    console.log("click");
     const fileInput = document.getElementById("imageInput");
     fileInput.click();
   };
@@ -60,8 +58,8 @@ const EditProfile: React.FC = () => {
         onRequestClose={() => dispatch(resetOpenProfile())}
         style={customStyles}
       >
-        <form className={styles.core_signUp}>
-          <h1 className={styles.core_title}>Irostagram</h1>
+        <form>
+          <h1>Irostagram</h1>
           <br />
           <TextField
             placeholder="nickname"

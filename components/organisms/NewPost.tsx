@@ -3,15 +3,15 @@ import React, { useState } from "react";
 import { MdAddAPhoto } from "react-icons/md";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "../../../stores";
+import { AppDispatch } from "../../stores";
 import {
   fetchAsyncNewPost,
   fetchPostEnd,
   fetchPostStart,
   resetOpenNewPost,
   selectOpenNewPost,
-} from "../../../stores/slices/postSlice";
-import { File } from "../types";
+} from "../../stores/slices/postSlice";
+import { File } from "../../stores/types";
 import styles from "./Core.module.css";
 
 const customStyles = {
@@ -53,8 +53,8 @@ const NewPost: React.FC = () => {
         onRequestClose={() => dispatch(resetOpenNewPost())}
         style={customStyles}
       >
-        <form className={styles.core_signUp}>
-          <h1 className={styles.core_title}>Irostagram</h1>
+        <form>
+          <h1>Irostagram</h1>
           <br />
           <TextField
             placeholder="Please enter caption"
