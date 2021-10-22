@@ -18,6 +18,7 @@ import {
   fetchPostEnd,
   fetchPostStart,
   selectComments,
+  selectPost,
 } from "../../stores/slices/postSlice";
 import { AppDispatch } from "../../stores";
 import { PROPS_POST } from "../../stores/types";
@@ -40,6 +41,7 @@ const PostCard: React.FC<PROPS_POST> = ({
   const profiles = useSelector(selectProfiles);
   const comments = useSelector(selectComments);
   const profile = useSelector(selectProfile);
+  const post = useSelector(selectPost);
   const [text, setText] = useState("");
 
   const commentsOnPost = comments.filter((comment) => {
@@ -68,6 +70,7 @@ const PostCard: React.FC<PROPS_POST> = ({
     };
     console.log(packet);
     await dispatch(fetchAsyncPatchLiked(packet));
+    console.log(post);
   };
 
   return (

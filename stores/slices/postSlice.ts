@@ -145,6 +145,9 @@ export const postSlice = createSlice({
     resetOpenNewPost(state) {
       state.openNewPost = false;
     },
+    setPost(state, action) {
+      state.post = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAsyncGetPosts.fulfilled, (state, action) => {
@@ -191,6 +194,7 @@ export const postSlice = createSlice({
         posts: state.posts.map((post) =>
           post.id === action.payload.id ? action.payload : post
         ),
+        post: action.payload,
       };
     });
   },
@@ -201,6 +205,7 @@ export const {
   fetchPostEnd,
   setOpenNewPost,
   resetOpenNewPost,
+  setPost,
 } = postSlice.actions;
 
 export const selectIsLoadingPost = (state: RootState) =>
