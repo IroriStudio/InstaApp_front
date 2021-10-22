@@ -1,4 +1,4 @@
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
 import { selectAuthMode } from "../../stores/slices/authSlice";

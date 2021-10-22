@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Auth from "../organisms/Auth";
-import { Grid } from "@material-ui/core";
+
 import {
   fetchAsyncGetMyProf,
   fetchAsyncGetProfs,
@@ -19,8 +19,7 @@ import Post from "../organisms/Post";
 import EditProfile from "../organisms/EditProfile";
 import NewPost from "../organisms/NewPost";
 import { AppDispatch } from "../../stores";
-import LoadingPost from "../organisms/LoadingPost";
-
+import { Grid } from "@mui/material";
 const Core: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const profile = useSelector(selectProfile);
@@ -50,35 +49,23 @@ const Core: React.FC = () => {
       <NewPost />
       {profile?.nickName && (
         <>
-          <div>
-            {/* <Grid container spacing={4}>
-              {posts
-                .slice(0)
-                .reverse()
-                .map((post) => (
-                  <Grid key={post.id} item xs={12} md={4}>
-                    <Post
-             
-                    />
-                  </Grid>
-                ))}
-            </Grid> */}
-            <Grid container spacing={4}>
-              {posts
-                .slice(0)
-                .reverse()
-                .map((post) => (
-                  <LoadingPost
-                    postId={post.id}
-                    title={post.title}
-                    loginId={profile.userProfile}
-                    userPost={post.userPost}
-                    imageUrl={post.img}
-                    liked={post.liked}
-                  />
-                ))}
-            </Grid>
-          </div>
+          <Grid container spacing={4}>
+            {posts
+              .slice(0)
+              .reverse()
+              .map((post) => (
+                <Post
+                  key={post.id}
+                  postId={post.id}
+                  title={post.title}
+                  loginId={profile.userProfile}
+                  userPost={post.userPost}
+                  imageUrl={post.img}
+                  liked={post.liked}
+                  created_on={post.created_on}
+                />
+              ))}
+          </Grid>
         </>
       )}
     </div>

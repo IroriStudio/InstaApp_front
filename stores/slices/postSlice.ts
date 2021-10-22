@@ -1,10 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
 import { RootState } from "..";
-import { PROPS_COMMENT, PROPS_LIKED, PROPS_NEWPOST } from "../types";
+import {
+  PROPS_COMMENT,
+  PROPS_LIKED,
+  PROPS_NEWPOST,
+  PROPS_POST_ID,
+} from "../types";
 
-const apiUrlPost = `${process.env.NEXT_PUBLIC_DEV_API_URL}api/post/`;
-const apiUrlComment = `${process.env.NEXT_PUBLIC_DEV_API_URL}api/comment/`;
+export const apiUrlPost = `${process.env.NEXT_PUBLIC_DEV_API_URL}api/post/`;
+export const apiUrlComment = `${process.env.NEXT_PUBLIC_DEV_API_URL}api/comment/`;
 
 export const fetchAsyncGetPosts = createAsyncThunk("post/get", async () => {
   const res = await axios.get(apiUrlPost, {
@@ -12,7 +17,6 @@ export const fetchAsyncGetPosts = createAsyncThunk("post/get", async () => {
       Authorization: `JWT ${localStorage.localJWT}`,
     },
   });
-
   return res.data;
 });
 
@@ -28,6 +32,17 @@ export const fetchAsyncNewPost = createAsyncThunk(
       },
     });
     return res.data;
+  }
+);
+export const fetchAsyncPostDelete = createAsyncThunk(
+  "post/delete",
+  async (postId: number) => {
+    const res = await axios.delete(`${apiUrlPost}${postId}/`, {
+      headers: {
+        Authorization: `JWT ${localStorage.localJWT}`,
+      },
+    });
+    return postId;
   }
 );
 
@@ -87,6 +102,17 @@ export const fetchAsyncPostComment = createAsyncThunk(
     return res.data;
   }
 );
+export const fetchAsyncDeleteComment = createAsyncThunk(
+  "comment/delete",
+  async (commentId: number) => {
+    const res = await axios.delete(`${apiUrlComment}${commentId}/`, {
+      headers: {
+        Authorization: `JWT ${localStorage.localJWT}`,
+      },
+    });
+    return commentId;
+  }
+);
 
 export const postSlice = createSlice({
   name: "post",
@@ -125,6 +151,12 @@ export const postSlice = createSlice({
         posts: [...state.posts, action.payload],
       };
     });
+    builder.addCase(fetchAsyncPostDelete.fulfilled, (state, action) => {
+      return {
+        ...state,
+        posts: state.posts.filter((post) => !(post.id === action.payload)),
+      };
+    });
     builder.addCase(fetchAsyncGetComments.fulfilled, (state, action) => {
       return {
         ...state,
@@ -135,6 +167,14 @@ export const postSlice = createSlice({
       return {
         ...state,
         comments: [...state.comments, action.payload],
+      };
+    });
+    builder.addCase(fetchAsyncDeleteComment.fulfilled, (state, action) => {
+      return {
+        ...state,
+        comments: state.comments.filter(
+          (comment) => !(comment.id === action.payload)
+        ),
       };
     });
     builder.addCase(fetchAsyncPatchLiked.fulfilled, (state, action) => {

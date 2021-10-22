@@ -1,6 +1,8 @@
 import React, { ReactNode } from "react";
 import Head from "next/head";
 import Header from "./templates/Header";
+import { Provider } from "react-redux";
+import { store } from "../stores";
 
 interface Props {
   children?: ReactNode;
@@ -8,7 +10,7 @@ interface Props {
 
 const Layout = ({ children }: Props) => {
   return (
-    <div>
+    <>
       <Head>
         <title>Irostagram</title>
         <meta charSet="utf-8" />
@@ -16,7 +18,7 @@ const Layout = ({ children }: Props) => {
       </Head>
       <Header />
       {children}
-    </div>
+    </>
   );
 };
 

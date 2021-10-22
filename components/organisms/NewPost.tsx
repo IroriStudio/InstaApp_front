@@ -22,6 +22,7 @@ const customStyles = {
     height: 220,
     padding: "50px",
     transform: "translate(-50%,-50%)",
+    zindex: "7",
   },
 };
 const NewPost: React.FC = () => {

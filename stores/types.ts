@@ -65,4 +65,8 @@ export interface PROPS_POST {
   title: string;
   imageUrl: string;
   liked: number[];
+  created_on: string;
+}
+export interface PROPS_POST_ID {
+  postId: number;
 }

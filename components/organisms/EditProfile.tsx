@@ -12,9 +12,10 @@ import {
 } from "../../stores/slices/authSlice";
 import { File } from "../../stores/types";
 import ReactModal from "react-modal";
-import { Button, IconButton, TextField } from "@material-ui/core";
+
 import { MdAddAPhoto } from "react-icons/md";
 import { resetOpenNewPost } from "../../stores/slices/postSlice";
+import { Button, IconButton, TextField } from "@mui/material";
 const customStyles = {
   content: {
     top: "55%",

@@ -6,7 +6,7 @@
 .auth_error {
   color: #ff00ff;
   text-align: center;
-  margin: 10px;
+  margin: 1rem;
 }
 .auth_form {
   display: flex;

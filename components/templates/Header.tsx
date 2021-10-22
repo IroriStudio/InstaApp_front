@@ -18,8 +18,9 @@ import {
 import { MdAddAPhoto } from "react-icons/md";
 import { MdExitToApp } from "react-icons/md";
 
-import { Button, CircularProgress, Badge, Avatar } from "@material-ui/core";
+import { Button, CircularProgress, Badge, Avatar } from "@mui/material";
 import MyAvatarButton from "../molecules/MyAvatarButton";
+import PostMenu from "../molecules/PostMenu";
 
 const Header: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -54,10 +55,11 @@ const Header: React.FC = () => {
             <button onClick={onClickAddPost} className={styles.header_btn}>
               <MdAddAPhoto />
             </button>
-            {(isLoadingPost || isLoadingAuth) && <CircularProgress />}
+            {isLoadingAuth && <CircularProgress />}
             <button onClick={onClickLogout} className={styles.header_btn}>
               <MdExitToApp />
             </button>
+
             <MyAvatarButton />
           </>
         )}

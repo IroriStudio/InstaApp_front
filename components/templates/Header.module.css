@@ -18,14 +18,14 @@
   text-align: center;
   color: gray;
   padding: 1rem;
-  font-size: 32px;
+  font-size: 2rem;
   border: none;
   outline: none;
   cursor: pointer;
 }
 
 .core_progress {
-  margin-top: 15px;
+  margin-top: 2rem;
   display: flex;
   justify-content: center;
 }
