@@ -22,13 +22,13 @@
   border-bottom: 0.1rem solid lightgray;
 }
 
-.post_comments_btn {
+.view_detail_btn {
   color: rgb(122, 122, 122);
   cursor: pointer;
   margin: 1rem 0;
 }
 
-.post_a_comment {
+.view_detail_btn {
   color: rgb(122, 122, 122);
 
   margin: 1rem 0;

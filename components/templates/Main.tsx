@@ -15,12 +15,12 @@ import {
   selectPosts,
 } from "../../stores/slices/postSlice";
 
-import Post from "../organisms/Post";
+import Post from "./Post";
 import EditProfile from "../organisms/EditProfile";
 import NewPost from "../organisms/NewPost";
 import { AppDispatch } from "../../stores";
 import { Grid } from "@mui/material";
-const Core: React.FC = () => {
+const Main: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const profile = useSelector(selectProfile);
   const posts = useSelector(selectPosts);
@@ -72,4 +72,4 @@ const Core: React.FC = () => {
   );
 };
 
-export default Core;
+export default Main;

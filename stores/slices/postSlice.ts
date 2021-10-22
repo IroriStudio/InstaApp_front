@@ -123,6 +123,14 @@ export const postSlice = createSlice({
       { id: 0, title: "", userPost: 0, created_on: "", img: "", liked: [0] },
     ],
     comments: [{ id: 0, text: "", userComment: 0, post: 0 }],
+    post: {
+      id: 0,
+      title: "",
+      userPost: 0,
+      created_on: "",
+      img: "",
+      liked: [0],
+    },
   },
   reducers: {
     fetchPostStart(state) {
@@ -199,6 +207,7 @@ export const selectIsLoadingPost = (state: RootState) =>
   state.post.isLoadingPost;
 export const selectOpenNewPost = (state: RootState) => state.post.openNewPost;
 export const selectPosts = (state: RootState) => state.post.posts;
+export const selectPost = (state: RootState) => state.post.post;
 export const selectComments = (state: RootState) => state.post.comments;
 
 export default postSlice.reducer;

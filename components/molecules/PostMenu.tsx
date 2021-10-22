@@ -6,15 +6,17 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 import IconButton from "@mui/material/IconButton";
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdOutlineCommentBank } from "react-icons/md";
+import { AiFillPicture } from "react-icons/ai";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../stores";
 import { fetchAsyncPostDelete } from "../../stores/slices/postSlice";
 import styles from "./PostMenu.module.css";
 import GoodButton from "../atoms/GoodButton";
 import router, { NextRouter, useRouter } from "next/router";
+import { onClickPostDetail } from "../../utils/post";
 
 interface Props {
   postId: number;
@@ -29,9 +31,14 @@ const PostMenu: React.FC<Props> = ({
   onClickLiked,
   isMyPost,
 }) => {
+  useEffect(() => {
+    // console.log("postId........", postId);
+    // console.log("checked........", checked);
+  }, []);
   const dispatch: AppDispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -41,13 +48,8 @@ const PostMenu: React.FC<Props> = ({
 
   const onClickDelete = async () => {
     await dispatch(fetchAsyncPostDelete(postId));
-    // console.log("object");
   };
 
-  const onClickPostDetail = (e) => {
-    e.preventDefault();
-    router.push(`/post/${postId}`);
-  };
   return (
     <>
       <IconButton aria-label="settings" onClick={handleClick}>
@@ -69,10 +71,13 @@ const PostMenu: React.FC<Props> = ({
           <GoodButton checked={checked} onClickLiked={onClickLiked} />
           <p className={styles.menu_item}>Good</p>
         </MenuItem>
-        <MenuItem>
-          <a className={styles.menu_item} onClick={onClickPostDetail}>
-            Detail
-          </a>
+        <MenuItem
+          onClick={(e) => {
+            onClickPostDetail(e, postId);
+          }}
+        >
+          <MdOutlineCommentBank size={25} />
+          <p className={styles.menu_item}>Detail</p>
         </MenuItem>
       </Menu>
     </>

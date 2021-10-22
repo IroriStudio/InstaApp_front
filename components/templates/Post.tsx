@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { PROPS_POST } from "../../stores/types";
 import { getAllPosts } from "../../utils/post";
-import LoadingPostCard from "./LoadingPostCard";
-import PostCard from "./PostCard";
+import LoadingPostCard from "../organisms/LoadingPostCard";
+import PostCard from "../organisms/PostCard";
 
 const Post: React.FC<PROPS_POST> = ({
   postId,

@@ -7,26 +7,25 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import SendIcon from "@mui/icons-material/Send";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { Grid } from "@mui/material";
+import { AvatarGroup } from "@material-ui/lab";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectProfile, selectProfiles } from "../../stores/slices/authSlice";
 import {
   fetchAsyncPatchLiked,
   fetchAsyncPostComment,
-  fetchAsyncPostDelete,
   fetchPostEnd,
   fetchPostStart,
   selectComments,
 } from "../../stores/slices/postSlice";
-import { Grid } from "@mui/material";
 import { AppDispatch } from "../../stores";
 import { PROPS_POST } from "../../stores/types";
 import styles from "./PostCard.module.css";
-import { AvatarGroup } from "@material-ui/lab";
 import PostMenu from "../molecules/PostMenu";
 import GoodButton from "../atoms/GoodButton";
 import Comments from "../molecules/Comments";
+import { onClickPostDetail } from "../../utils/post";
 
 const PostCard: React.FC<PROPS_POST> = ({
   postId,
@@ -67,6 +66,7 @@ const PostCard: React.FC<PROPS_POST> = ({
       current: liked,
       new: loginId,
     };
+    console.log(packet);
     await dispatch(fetchAsyncPatchLiked(packet));
   };
 
@@ -74,7 +74,7 @@ const PostCard: React.FC<PROPS_POST> = ({
     <Grid item xs={12} md={4}>
       <Card>
         <CardHeader
-          avatar={<Avatar alt="Ted talk" src={prof[0]?.img} />}
+          avatar={<Avatar alt="my avatar" src={prof[0]?.img} />}
           action={
             <PostMenu
               postId={postId}
@@ -89,10 +89,11 @@ const PostCard: React.FC<PROPS_POST> = ({
         <Image
           src={imageUrl}
           alt="image"
-          width={600}
-          height={300}
+          width={1000}
+          height={600}
           objectFit="contain"
         />
+        {/* <img src={imageUrl} alt="image" className={styles.post_image} /> */}
         <CardContent>
           <div style={{ display: "flex" }}>
             <Typography mt={1} mr={1}>
@@ -127,12 +128,22 @@ const PostCard: React.FC<PROPS_POST> = ({
           </div>
 
           {commentsOnPost.length > 0 ? (
-            <Typography style={{}}>
-              <a className={styles.post_comments_btn}>View all comments</a>
+            <Typography>
+              <a
+                onClick={(e) => onClickPostDetail(e, postId)}
+                className={styles.view_detail_btn}
+              >
+                View all comments
+              </a>
             </Typography>
           ) : (
             <Typography>
-              <a className={styles.post_a_comment}>Post a comment </a>
+              <a
+                onClick={(e) => onClickPostDetail(e, postId)}
+                className={styles.view_detail_btn}
+              >
+                view the detail
+              </a>
             </Typography>
           )}
           {/* <Comments

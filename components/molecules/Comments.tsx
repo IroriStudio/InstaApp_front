@@ -27,7 +27,7 @@ const Comments: React.FC<any> = ({ postId, userPost, created_on }) => {
     <div className={styles.comments_box}>
       {commentsOnPost.map((comment) => (
         <div className={styles.comment_box} key={comment.id}>
-          <Avatar alt="Ted talk" src={prof[0]?.img} />
+          <Avatar alt="my avatar" src={prof[0]?.img} />
           <p className={styles.comment_nickname}>
             <strong>{prof[0]?.nickName}</strong>
           </p>
