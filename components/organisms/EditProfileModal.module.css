@@ -1,0 +1,23 @@
+.modal_title {
+  font-family: "Playball", cursive;
+  font-weight: normal;
+  text-align: center;
+}
+.edit_prof_avatar {
+  margin: 2em auto;
+}
+.auth_error {
+  color: #ff00ff;
+  text-align: center;
+  margin: 1.5rem;
+}
+.auth_form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+}
+
+.auth_progress {
+  margin: 2rem;
+}

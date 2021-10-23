@@ -11,7 +11,11 @@ import { Grid } from "@mui/material";
 import { AvatarGroup } from "@material-ui/lab";
 
 import { useDispatch, useSelector } from "react-redux";
-import { selectProfile, selectProfiles } from "../../stores/slices/authSlice";
+import {
+  selectProfile,
+  selectProfiles,
+  setAuthModal,
+} from "../../stores/slices/authSlice";
 import {
   fetchAsyncPostComment,
   fetchPostEnd,
@@ -24,6 +28,7 @@ import styles from "./PostCard.module.css";
 import PostMenu from "../molecules/PostMenu";
 import GoodButton from "../atoms/GoodButton";
 import { onClickGood, onClickPostDetail } from "../../utils/post";
+import FirstComment from "../molecules/FirstComment";
 
 interface Props {
   post: PROPS_POST;
@@ -67,7 +72,7 @@ const PostCard: React.FC<Props> = ({ post }) => {
     new: loginId,
   };
   return (
-    <Grid item xs={12} md={4}>
+    <Grid item xs={12} md={6}>
       <Card>
         <CardHeader
           avatar={<Avatar alt="my avatar" src={postProfile?.img} />}
@@ -126,7 +131,7 @@ const PostCard: React.FC<Props> = ({ post }) => {
                 : "Be the first to like this"}
             </Typography>
           </div>
-
+          <FirstComment comment={commentsOnPost[0]} />
           {commentsOnPost.length > 0 ? (
             <Typography>
               <a
@@ -146,27 +151,46 @@ const PostCard: React.FC<Props> = ({ post }) => {
               </a>
             </Typography>
           )}
-          {/* <Comments
-            postId={postId}
-            userPost={userPost}
-            created_on={created_on}
-          /> */}
-          <form className={styles.post_commentBox}>
-            <input
-              className={styles.post_input}
-              type="text"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-            />
 
-            <IconButton
-              disabled={!text.length}
-              type="submit"
-              onClick={postComment}
-            >
-              <SendIcon />
-            </IconButton>
-          </form>
+          {profile.nickName ? (
+            <form className={styles.post_input_box}>
+              <input
+                className={styles.post_input}
+                type="text"
+                placeholder="comment to this post"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+              />
+
+              <IconButton
+                disabled={!text.length}
+                type="submit"
+                onClick={postComment}
+              >
+                <SendIcon />
+              </IconButton>
+            </form>
+          ) : (
+            <div className={styles.post_input_box}>
+              <div className={styles.post_input}>
+                <Typography>
+                  <a
+                    onClick={() => {
+                      dispatch(setAuthModal(true));
+                    }}
+                    className={styles.post_sign_in}
+                  >
+                    Sign In
+                  </a>
+                  {"  "}
+                  to good or comment
+                </Typography>
+              </div>
+              <IconButton disabled={true}>
+                <SendIcon />
+              </IconButton>
+            </div>
+          )}
         </CardContent>
       </Card>
     </Grid>

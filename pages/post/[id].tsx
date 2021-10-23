@@ -127,7 +127,7 @@ const Post = ({ fetchedPost }: any) => {
             userPost={userPost}
             created_on={created_on}
           /> */}
-            {/* <form className={styles.post_commentBox}>
+            {/* <form className={styles.post_input_box}>
             <input
               className={styles.post_input}
               type="text"

@@ -45,7 +45,7 @@ const MyAvatarButton: React.FC = () => {
 
   return (
     <button
-      onClick={onClickAvater}
+      onClick={() => {}}
       style={{ color: "red", backgroundColor: "transparent", border: "none" }}
     >
       <StyledBadge

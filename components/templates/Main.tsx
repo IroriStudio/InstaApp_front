@@ -16,8 +16,8 @@ import {
 } from "../../stores/slices/postSlice";
 
 import Post from "./Post";
-import EditProfile from "../organisms/EditProfile";
-import NewPost from "../organisms/NewPost";
+import EditProfile from "../organisms/EditProfileModal";
+import NewPost from "../organisms/NewPostModal";
 import { AppDispatch } from "../../stores";
 
 const Main: React.FC = () => {
@@ -38,9 +38,6 @@ const Main: React.FC = () => {
 
   return (
     <div>
-      <EditProfile />
-      <NewPost />
-
       <>
         <Grid container spacing={4}>
           {posts

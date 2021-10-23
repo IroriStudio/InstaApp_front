@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "../../stores";
+import { Button, IconButton, TextField, Avatar } from "@mui/material";
 import Modal from "react-modal";
+import styles from "./EditProfileModal.module.css";
+import { AppDispatch } from "../../stores";
 import {
   fetchAsyncUpdateProf,
   fetchCredEnd,
@@ -11,17 +14,16 @@ import {
   selectProfile,
 } from "../../stores/slices/authSlice";
 import { File } from "../../stores/types";
-
 import { MdAddAPhoto } from "react-icons/md";
-import { Button, IconButton, TextField } from "@mui/material";
 const customStyles = {
   content: {
     top: "55%",
     left: "50%",
     width: 280,
-    height: 220,
+    height: 500,
     padding: "50px",
     transform: "translate(-50%, -50%)",
+    // textAlign: "center",
   },
 };
 
@@ -31,9 +33,11 @@ const EditProfile: React.FC = () => {
   const profile = useSelector(selectProfile);
   const [nickName, setNickname] = useState<string>(profile?.nickName);
   const [image, setImage] = useState<File | null>(null);
+  const [avatarUrl, setAvatarUrl] = useState<string>(profile?.img);
 
   useEffect(() => {
     setNickname(profile?.nickName);
+    setAvatarUrl(profile?.img);
   }, [profile]);
 
   const updateProfile = async (e: React.MouseEvent<HTMLElement>) => {
@@ -56,8 +60,8 @@ const EditProfile: React.FC = () => {
         onRequestClose={() => dispatch(resetOpenProfile())}
         style={customStyles}
       >
-        <form>
-          <h1>Irostagram</h1>
+        <form style={{ textAlign: "center" }}>
+          <h1 className={styles.modal_title}>Irostagram</h1>
           <br />
           <TextField
             placeholder="nickname"
@@ -71,11 +75,21 @@ const EditProfile: React.FC = () => {
             hidden={true}
             onChange={(e) => setImage(e.target.files![0])}
           />
-          <br />
-          <IconButton onClick={handlerEditPicture}>
-            <MdAddAPhoto />
-          </IconButton>
-          <br />
+          <div className={styles.edit_prof_avatar}>
+            <Avatar
+              style={{
+                height: "10rem",
+                width: "10rem",
+                zIndex: 0,
+                margin: "1rem auto",
+              }}
+              src={avatarUrl}
+            />
+            <IconButton onClick={handlerEditPicture}>
+              <MdAddAPhoto />
+            </IconButton>
+          </div>
+
           <Button
             disabled={!profile?.nickName}
             variant="contained"

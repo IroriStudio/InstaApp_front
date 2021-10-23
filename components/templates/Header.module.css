@@ -4,6 +4,7 @@
   text-align: center;
   color: black;
   padding: 0 3rem;
+  flex: 1;
 }
 
 .header_nav {
@@ -14,11 +15,14 @@
 }
 .header_btn {
   background-color: transparent;
-  justify-content: center;
-  text-align: center;
+  /* justify-content: center;
+  text-align: center; */
+  /* background-color: red; */
   color: gray;
-  padding: 1rem;
-  font-size: 2rem;
+  width: 4rem;
+  height: 4rem;
+  /* font-size: 2rem; */
+  margin-top: 0.6rem;
   border: none;
   outline: none;
   cursor: pointer;

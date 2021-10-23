@@ -4,39 +4,21 @@ import styles from "./Header.module.css";
 import { AppDispatch } from "../../stores";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  editNickname,
-  resetOpenProfile,
   selectIsLoadingAuth,
   selectProfile,
+  setAuthModal,
 } from "../../stores/slices/authSlice";
-import {
-  resetOpenNewPost,
-  setOpenNewPost,
-  resetPost,
-} from "../../stores/slices/postSlice";
-import { MdAddAPhoto } from "react-icons/md";
-import { MdExitToApp } from "react-icons/md";
 
-import { CircularProgress } from "@mui/material";
-import MyAvatarButton from "../molecules/MyAvatarButton";
+import { MdLogin } from "react-icons/md";
+
+import { CircularProgress, IconButton } from "@mui/material";
+import MyMenu from "../molecules/MyMenu";
 
 const Header: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const profile = useSelector(selectProfile);
   const isLoadingAuth = useSelector(selectIsLoadingAuth);
 
-  const onClickLogout = () => {
-    localStorage.removeItem("localJWT");
-    dispatch(editNickname(""));
-    dispatch(resetOpenProfile());
-    dispatch(resetOpenNewPost());
-    // dispatch(resetPost());
-  };
-
-  const onClickAddPost = () => {
-    dispatch(setOpenNewPost());
-    dispatch(resetOpenProfile());
-  };
   return (
     <header>
       <nav className={styles.header_nav}>
@@ -46,18 +28,20 @@ const Header: React.FC = () => {
           </a>
         </Link>
 
-        {profile?.nickName && (
+        {profile?.nickName ? (
           <>
-            <button onClick={onClickAddPost} className={styles.header_btn}>
-              <MdAddAPhoto />
-            </button>
             {isLoadingAuth && <CircularProgress />}
-            <button onClick={onClickLogout} className={styles.header_btn}>
-              <MdExitToApp />
-            </button>
-
-            <MyAvatarButton />
+            <MyMenu />
           </>
+        ) : (
+          <IconButton
+            onClick={() => {
+              dispatch(setAuthModal(true));
+            }}
+            className={styles.header_btn}
+          >
+            <MdLogin />
+          </IconButton>
         )}
       </nav>
     </header>

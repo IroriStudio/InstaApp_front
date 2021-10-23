@@ -1,4 +1,4 @@
-import { Button, IconButton, TextField } from "@material-ui/core";
+import { Button, IconButton, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { MdAddAPhoto } from "react-icons/md";
 import Modal from "react-modal";
@@ -19,10 +19,9 @@ const customStyles = {
     top: "55%",
     left: "50%",
     width: 280,
-    height: 220,
+    height: 500,
     padding: "50px",
-    transform: "translate(-50%,-50%)",
-    zindex: "7",
+    transform: "translate(-50%, -50%)",
   },
 };
 const NewPost: React.FC = () => {
