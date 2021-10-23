@@ -11,20 +11,16 @@ import {
   selectProfile,
 } from "../../stores/slices/authSlice";
 import { File } from "../../stores/types";
-import ReactModal from "react-modal";
 
 import { MdAddAPhoto } from "react-icons/md";
-import { resetOpenNewPost } from "../../stores/slices/postSlice";
 import { Button, IconButton, TextField } from "@mui/material";
 const customStyles = {
   content: {
     top: "55%",
     left: "50%",
-
     width: 280,
     height: 220,
     padding: "50px",
-
     transform: "translate(-50%, -50%)",
   },
 };
@@ -35,6 +31,10 @@ const EditProfile: React.FC = () => {
   const profile = useSelector(selectProfile);
   const [nickName, setNickname] = useState<string>(profile?.nickName);
   const [image, setImage] = useState<File | null>(null);
+
+  useEffect(() => {
+    setNickname(profile?.nickName);
+  }, [profile]);
 
   const updateProfile = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
@@ -49,9 +49,6 @@ const EditProfile: React.FC = () => {
     fileInput.click();
   };
 
-  useEffect(() => {
-    setNickname(profile?.nickName);
-  }, [profile]);
   return (
     <>
       <Modal

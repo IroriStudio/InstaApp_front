@@ -13,101 +13,98 @@ import { AvatarGroup } from "@material-ui/lab";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProfile, selectProfiles } from "../../stores/slices/authSlice";
 import {
-  fetchAsyncPatchLiked,
   fetchAsyncPostComment,
   fetchPostEnd,
   fetchPostStart,
   selectComments,
-  selectPost,
 } from "../../stores/slices/postSlice";
 import { AppDispatch } from "../../stores";
 import { PROPS_POST } from "../../stores/types";
 import styles from "./PostCard.module.css";
 import PostMenu from "../molecules/PostMenu";
 import GoodButton from "../atoms/GoodButton";
-import Comments from "../molecules/Comments";
-import { onClickPostDetail } from "../../utils/post";
+import { onClickGood, onClickPostDetail } from "../../utils/post";
 
-const PostCard: React.FC<PROPS_POST> = ({
-  postId,
-  loginId,
-  userPost,
-  title,
-  imageUrl,
-  liked,
-  created_on,
-}) => {
+interface Props {
+  post: PROPS_POST;
+}
+
+const PostCard: React.FC<Props> = ({ post }) => {
   const dispatch: AppDispatch = useDispatch();
   const profiles = useSelector(selectProfiles);
   const comments = useSelector(selectComments);
   const profile = useSelector(selectProfile);
-  const post = useSelector(selectPost);
+  const loginId = profile.userProfile;
+
   const [text, setText] = useState("");
 
+  const { id, userPost, title, img, liked, created_on } = post;
+
   const commentsOnPost = comments.filter((comment) => {
-    return comment.post === postId;
+    return comment.post === id;
   });
 
-  const prof = profiles.filter((prof) => {
+  const postProfile = profiles.filter((prof) => {
     return prof.userProfile === userPost;
-  });
+  })[0];
 
   const postComment = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    const packet = { text: text, post: postId };
+    const packet = { text: text, post: id };
     await dispatch(fetchPostStart());
     await dispatch(fetchAsyncPostComment(packet));
     await dispatch(fetchPostEnd());
     setText("");
   };
+  const checked = profile.nickName
+    ? liked.some((like) => like === loginId)
+    : false;
 
-  const onClickLiked = async () => {
-    const packet = {
-      id: postId,
-      title: title,
-      current: liked,
-      new: loginId,
-    };
-    console.log(packet);
-    await dispatch(fetchAsyncPatchLiked(packet));
-    console.log(post);
+  const packet = {
+    id: id,
+    title: title,
+    current: liked,
+    new: loginId,
   };
-
   return (
     <Grid item xs={12} md={4}>
       <Card>
         <CardHeader
-          avatar={<Avatar alt="my avatar" src={prof[0]?.img} />}
+          avatar={<Avatar alt="my avatar" src={postProfile?.img} />}
           action={
             <PostMenu
-              postId={postId}
-              checked={liked.some((like) => like === loginId)}
-              onClickLiked={onClickLiked}
+              id={id}
+              checked={checked}
+              onClickGood={async () => {
+                await onClickGood(packet, profile, dispatch);
+              }}
               isMyPost={profile.userProfile === userPost}
             />
           }
-          title={prof[0]?.nickName}
+          title={postProfile?.nickName}
           subheader={created_on}
         />
         <Image
-          src={imageUrl}
+          src={img}
           alt="image"
           width={1000}
           height={600}
           objectFit="contain"
         />
-        {/* <img src={imageUrl} alt="image" className={styles.post_image} /> */}
+
         <CardContent>
           <div style={{ display: "flex" }}>
             <Typography mt={1} mr={1}>
-              <strong>{prof[0]?.nickName}</strong>
+              <strong>{postProfile?.nickName}</strong>
             </Typography>
             <Typography mt={1}>{title}</Typography>
           </div>
           <div style={{ display: "flex", zIndex: 0 }}>
             <GoodButton
               checked={liked.some((like) => like === loginId)}
-              onClickLiked={onClickLiked}
+              onClickGood={async () => {
+                await onClickGood(packet, profile, dispatch);
+              }}
             />
             <AvatarGroup max={3}>
               {liked.map((like) => (
@@ -133,7 +130,7 @@ const PostCard: React.FC<PROPS_POST> = ({
           {commentsOnPost.length > 0 ? (
             <Typography>
               <a
-                onClick={(e) => onClickPostDetail(e, postId)}
+                onClick={(e) => onClickPostDetail(e, id)}
                 className={styles.view_detail_btn}
               >
                 View all comments
@@ -142,7 +139,7 @@ const PostCard: React.FC<PROPS_POST> = ({
           ) : (
             <Typography>
               <a
-                onClick={(e) => onClickPostDetail(e, postId)}
+                onClick={(e) => onClickPostDetail(e, id)}
                 className={styles.view_detail_btn}
               >
                 view the detail

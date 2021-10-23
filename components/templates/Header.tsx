@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import Link from "next/link";
 import styles from "./Header.module.css";
 import { AppDispatch } from "../../stores";
@@ -8,24 +8,21 @@ import {
   resetOpenProfile,
   selectIsLoadingAuth,
   selectProfile,
-  setAuthModal,
 } from "../../stores/slices/authSlice";
 import {
   resetOpenNewPost,
   setOpenNewPost,
-  selectIsLoadingPost,
+  resetPost,
 } from "../../stores/slices/postSlice";
 import { MdAddAPhoto } from "react-icons/md";
 import { MdExitToApp } from "react-icons/md";
 
-import { Button, CircularProgress, Badge, Avatar } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import MyAvatarButton from "../molecules/MyAvatarButton";
-import PostMenu from "../molecules/PostMenu";
 
 const Header: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const profile = useSelector(selectProfile);
-  const isLoadingPost = useSelector(selectIsLoadingPost);
   const isLoadingAuth = useSelector(selectIsLoadingAuth);
 
   const onClickLogout = () => {
@@ -33,8 +30,7 @@ const Header: React.FC = () => {
     dispatch(editNickname(""));
     dispatch(resetOpenProfile());
     dispatch(resetOpenNewPost());
-    React.memo;
-    dispatch(setAuthModal(true));
+    // dispatch(resetPost());
   };
 
   const onClickAddPost = () => {

@@ -76,9 +76,7 @@ export const fetchAsyncGetMyProf = createAsyncThunk("profile/get", async () => {
 });
 
 export const fetchAsyncGetProfs = createAsyncThunk("profiles/get", async () => {
-  const res = await axios.get(`${apiUrl}api/profile/`, {
-    headers: { Authorization: `JWT ${localStorage.localJWT}` },
-  });
+  const res = await axios.get(`${apiUrl}api/profile/`);
 
   return res.data;
 });
@@ -86,7 +84,7 @@ export const fetchAsyncGetProfs = createAsyncThunk("profiles/get", async () => {
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
-    isOpenAuthModal: true,
+    isOpenAuthModal: false,
     authMode: "login",
     openProfile: false,
     isLoadingAuth: false,

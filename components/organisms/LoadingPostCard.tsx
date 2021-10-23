@@ -28,9 +28,7 @@ const LoadingPostCard: React.FC = () => {
           }
           subheader={<Skeleton animation="wave" height={10} width="40%" />}
         />
-
         <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" />
-
         <CardContent>
           <React.Fragment>
             <Skeleton

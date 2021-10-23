@@ -12,11 +12,7 @@ export const apiUrlPost = `${process.env.NEXT_PUBLIC_DEV_API_URL}api/post/`;
 export const apiUrlComment = `${process.env.NEXT_PUBLIC_DEV_API_URL}api/comment/`;
 
 export const fetchAsyncGetPosts = createAsyncThunk("post/get", async () => {
-  const res = await axios.get(apiUrlPost, {
-    headers: {
-      Authorization: `JWT ${localStorage.localJWT}`,
-    },
-  });
+  const res = await axios.get(apiUrlPost);
   return res.data;
 });
 
@@ -148,6 +144,16 @@ export const postSlice = createSlice({
     setPost(state, action) {
       state.post = action.payload;
     },
+    resetPost(state) {
+      state.post = {
+        id: 0,
+        title: "",
+        userPost: 0,
+        created_on: "",
+        img: "",
+        liked: [0],
+      };
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAsyncGetPosts.fulfilled, (state, action) => {
@@ -206,6 +212,7 @@ export const {
   setOpenNewPost,
   resetOpenNewPost,
   setPost,
+  resetPost,
 } = postSlice.actions;
 
 export const selectIsLoadingPost = (state: RootState) =>

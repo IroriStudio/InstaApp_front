@@ -2,11 +2,15 @@ import React from "react";
 import styles from "./Auth.module.css";
 import Modal from "react-modal";
 
-import { useSelector } from "react-redux";
-import { selectIsOpenAuthModal } from "../../stores/slices/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectIsOpenAuthModal,
+  setAuthModal,
+} from "../../stores/slices/authSlice";
 
 import ChangeAuthModeText from "../atoms/ChangeAuthModeText";
 import AuthForm from "../molecules/AuthForm";
+import { AppDispatch } from "../../stores";
 
 const customStyles = {
   content: {
@@ -21,10 +25,15 @@ const customStyles = {
 const AuthModal: React.FC = () => {
   Modal.setAppElement("#__next");
   const isOpenAuthModal = useSelector(selectIsOpenAuthModal);
+  const dispatch: AppDispatch = useDispatch();
 
   return (
     <>
-      <Modal isOpen={isOpenAuthModal} style={customStyles}>
+      <Modal
+        isOpen={isOpenAuthModal}
+        style={customStyles}
+        onRequestClose={() => dispatch(setAuthModal(false))}
+      >
         <h1 className={styles.auth_title}>Irostagram</h1>
         <AuthForm />
         <ChangeAuthModeText />

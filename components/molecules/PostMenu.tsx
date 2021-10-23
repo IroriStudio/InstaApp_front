@@ -1,84 +1,69 @@
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-
-import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-
 import IconButton from "@mui/material/IconButton";
 import { MdDelete, MdOutlineCommentBank } from "react-icons/md";
-import { AiFillPicture } from "react-icons/ai";
-
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../stores";
-import { fetchAsyncPostDelete } from "../../stores/slices/postSlice";
 import styles from "./PostMenu.module.css";
 import GoodButton from "../atoms/GoodButton";
-import router, { NextRouter, useRouter } from "next/router";
-import { onClickPostDetail } from "../../utils/post";
+import { onClickDelete, onClickPostDetail } from "../../utils/post";
+import { selectProfile } from "../../stores/slices/authSlice";
+import { useRouter } from "next/router";
 
 interface Props {
-  postId: number;
+  id: number;
   checked: boolean;
-  onClickLiked: () => void;
+  onClickGood: () => void;
   isMyPost: boolean;
 }
 
-const PostMenu: React.FC<Props> = ({
-  postId,
-  checked,
-  onClickLiked,
-  isMyPost,
-}) => {
-  useEffect(() => {
-    // console.log("postId........", postId);
-    // console.log("checked........", checked);
-  }, []);
+const PostMenu: React.FC<Props> = ({ id, checked, onClickGood, isMyPost }) => {
   const dispatch: AppDispatch = useDispatch();
+  const profile = useSelector(selectProfile);
+  const router = useRouter();
+  const path = router.pathname;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+  const handleClickMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleCloseMenu = () => {
     setAnchorEl(null);
   };
-
-  const onClickDelete = async () => {
-    await dispatch(fetchAsyncPostDelete(postId));
-  };
-
   return (
     <>
-      <IconButton aria-label="settings" onClick={handleClick}>
+      <IconButton aria-label="settings" onClick={handleClickMenu}>
         <MoreVertIcon />
       </IconButton>
       <Menu
         anchorEl={anchorEl}
         open={open}
-        onClose={handleClose}
-        onClick={handleClose}
+        onClose={handleCloseMenu}
+        onClick={handleCloseMenu}
       >
-        {isMyPost && (
-          <MenuItem onClick={onClickDelete}>
+        {isMyPost && profile.nickName && (
+          <MenuItem onClick={async () => await onClickDelete(id, dispatch)}>
             <MdDelete size={25} />
             <p className={styles.menu_item}>Delete</p>
           </MenuItem>
         )}
         <MenuItem>
-          <GoodButton checked={checked} onClickLiked={onClickLiked} />
+          <GoodButton checked={checked} onClickGood={onClickGood} />
           <p className={styles.menu_item}>Good</p>
         </MenuItem>
-        <MenuItem
-          onClick={(e) => {
-            onClickPostDetail(e, postId);
-          }}
-        >
-          <MdOutlineCommentBank size={25} />
-          <p className={styles.menu_item}>Detail</p>
-        </MenuItem>
+        {path == "/" && (
+          <MenuItem
+            onClick={(e) => {
+              onClickPostDetail(e, id);
+            }}
+          >
+            <MdOutlineCommentBank size={25} />
+            <p className={styles.menu_item}>Detail</p>
+          </MenuItem>
+        )}
       </Menu>
     </>
   );
