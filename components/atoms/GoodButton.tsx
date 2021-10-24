@@ -12,14 +12,6 @@ interface Props {
 
 const GoodButton: React.FC<Props> = ({ checked, onClickGood }) => {
   const profile = useSelector(selectProfile);
-  // const { id, title, liked } = post;
-  // const packet = {
-  //   id: id,
-  //   title: title,
-  //   current: liked,
-  //   new: profile.userProfile,
-  // };
-
   const isChecked = profile.nickName == "" ? false : checked;
   return (
     <Checkbox

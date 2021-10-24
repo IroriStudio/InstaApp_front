@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, IconButton, TextField, Avatar } from "@mui/material";
@@ -20,10 +20,13 @@ const customStyles = {
     top: "55%",
     left: "50%",
     width: 280,
-    height: 500,
-    padding: "50px",
+    height: 450,
+    padding: "5rem",
     transform: "translate(-50%, -50%)",
-    // textAlign: "center",
+    border: "none",
+  },
+  overlay: {
+    backgroundColor: "rgba(0,0,0,0.85)",
   },
 };
 
@@ -48,9 +51,27 @@ const EditProfile: React.FC = () => {
     dispatch(fetchCredEnd());
     dispatch(resetOpenProfile());
   };
-  const handlerEditPicture = () => {
+  const onClickButton = () => {
     const fileInput = document.getElementById("imageInput");
     fileInput.click();
+  };
+
+  const imageHander = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files === null) {
+      return;
+    }
+    const file = event.target.files![0];
+    setImage(file);
+    if (file === null) {
+      return;
+    }
+    let imgTag = document.getElementById("preview") as HTMLImageElement;
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      const result: string = reader.result as string;
+      imgTag.src = result;
+    };
   };
 
   return (
@@ -62,36 +83,41 @@ const EditProfile: React.FC = () => {
       >
         <form style={{ textAlign: "center" }}>
           <h1 className={styles.modal_title}>Irostagram</h1>
-          <br />
           <TextField
             placeholder="nickname"
             type="text"
             value={nickName}
             onChange={(e) => setNickname(e.target.value)}
           />
+          <br />
+          <br />
           <input
             type="file"
+            accept="image/png, image/jpeg, image/gif"
+            onChange={imageHander}
             id="imageInput"
             hidden={true}
-            onChange={(e) => setImage(e.target.files![0])}
           />
           <div className={styles.edit_prof_avatar}>
-            <Avatar
-              style={{
-                height: "10rem",
-                width: "10rem",
-                zIndex: 0,
-                margin: "1rem auto",
-              }}
+            <img
+              id="preview"
               src={avatarUrl}
-            />
-            <IconButton onClick={handlerEditPicture}>
-              <MdAddAPhoto />
-            </IconButton>
+              style={{
+                width: "10rem",
+                height: "10rem",
+                borderRadius: "5rem",
+                objectFit: "cover",
+              }}
+            ></img>
+            <div style={{ width: "100%" }}>
+              <IconButton onClick={onClickButton}>
+                <MdAddAPhoto />
+              </IconButton>
+            </div>
           </div>
-
+          <br />
           <Button
-            disabled={!profile?.nickName}
+            disabled={!nickName || !image}
             variant="contained"
             color="primary"
             type="submit"

@@ -1,5 +1,5 @@
 import { Button, IconButton, TextField } from "@mui/material";
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { MdAddAPhoto } from "react-icons/md";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,16 +12,19 @@ import {
   selectOpenNewPost,
 } from "../../stores/slices/postSlice";
 import { File } from "../../stores/types";
-import styles from "./Core.module.css";
+import styles from "./EditProfileModal.module.css";
 
 const customStyles = {
   content: {
     top: "55%",
     left: "50%",
     width: 280,
-    height: 500,
+    height: 400,
     padding: "50px",
     transform: "translate(-50%, -50%)",
+  },
+  overlay: {
+    backgroundColor: "rgba(0,0,0,0.85)",
   },
 };
 const NewPost: React.FC = () => {
@@ -29,10 +32,29 @@ const NewPost: React.FC = () => {
   const openNewPost = useSelector(selectOpenNewPost);
   const [image, setImage] = useState<File | null>(null);
   const [title, setTitle] = useState<string>("");
+  const [postUrl, setPostrUrl] = useState<string>(null);
 
-  const handleEditPicture = () => {
+  const onClickButton = () => {
     const fileInput = document.getElementById("imageInput");
     fileInput.click();
+  };
+
+  const imageHander = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files === null) {
+      return;
+    }
+    const file = event.target.files![0];
+    setImage(file);
+    if (file === null) {
+      return;
+    }
+    let imgTag = document.getElementById("preview") as HTMLImageElement;
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      const result: string = reader.result as string;
+      imgTag.src = result;
+    };
   };
 
   const newPost = async (e: React.MouseEvent<HTMLElement>) => {
@@ -45,34 +67,59 @@ const NewPost: React.FC = () => {
     setImage(null);
     dispatch(resetOpenNewPost());
   };
+  const ModalClose = () => {
+    setImage(null);
+    dispatch(resetOpenNewPost());
+  };
 
   return (
     <>
       <Modal
         isOpen={openNewPost}
-        onRequestClose={() => dispatch(resetOpenNewPost())}
+        onRequestClose={ModalClose}
         style={customStyles}
       >
-        <form>
-          <h1>Irostagram</h1>
+        <form style={{ textAlign: "center" }}>
+          <h1 className={styles.modal_title}>Irostagram</h1>
+
           <br />
           <TextField
-            placeholder="Please enter caption"
+            placeholder="Set a title"
             type="text"
+            value={title}
             onChange={(e) => {
               setTitle(e.target.value);
             }}
           />
+          <br />
+          <br />
           <input
             type="file"
+            accept="image/png, image/jpeg, image/gif"
+            onChange={imageHander}
             id="imageInput"
             hidden={true}
-            onChange={(e) => setImage(e.target.files[0])}
           />
-          <br />
-          <IconButton onClick={handleEditPicture}>
-            <MdAddAPhoto />
-          </IconButton>
+
+          <div className={styles.edit_prof_avatar}>
+            <img
+              id="preview"
+              src={postUrl}
+              style={{
+                width: "100%",
+                height: "20rem",
+                objectFit: "contain",
+                border: "none",
+              }}
+              hidden={image ? false : true}
+            ></img>
+
+            <div style={{ width: "100%" }}>
+              <IconButton onClick={onClickButton}>
+                <MdAddAPhoto />
+              </IconButton>
+            </div>
+          </div>
           <br />
 
           <Button

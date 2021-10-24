@@ -4,20 +4,10 @@
   text-align: center;
 }
 .edit_prof_avatar {
-  margin: 2em auto;
+  background-color: "red";
+  /* width: 600px; */
 }
-.auth_error {
-  color: #ff00ff;
-  text-align: center;
-  margin: 1.5rem;
-}
-.auth_form {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  width: 100%;
-}
-
-.auth_progress {
-  margin: 2rem;
+.image_preview {
+  width: 10rem;
+  height: 10rem;
 }

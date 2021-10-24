@@ -20,6 +20,10 @@ const customStyles = {
     height: 490,
     padding: "50px",
     transform: "translate(-50%, -50%)",
+    border: "none",
+  },
+  overlay: {
+    backgroundColor: "rgba(0,0,0,0.85)",
   },
 };
 const AuthModal: React.FC = () => {

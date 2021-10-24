@@ -7,7 +7,6 @@
 .post_header {
   display: flex;
   align-items: center;
-  /* padding: 15px; */
 }
 
 .post_input_box {
@@ -33,6 +32,5 @@
 
 .view_detail_btn {
   color: rgb(122, 122, 122);
-
   margin: 1rem 0;
 }
