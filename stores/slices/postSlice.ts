@@ -113,6 +113,7 @@ export const fetchAsyncDeleteComment = createAsyncThunk(
 export const postSlice = createSlice({
   name: "post",
   initialState: {
+    isLoadingPage: false,
     isLoadingPost: false,
     openNewPost: false,
     posts: [
@@ -129,6 +130,12 @@ export const postSlice = createSlice({
     },
   },
   reducers: {
+    fetchPageStart(state) {
+      state.isLoadingPage = true;
+    },
+    fetchPageEnd(state) {
+      state.isLoadingPage = false;
+    },
     fetchPostStart(state) {
       state.isLoadingPost = true;
     },
@@ -207,6 +214,8 @@ export const postSlice = createSlice({
 });
 
 export const {
+  fetchPageStart,
+  fetchPageEnd,
   fetchPostStart,
   fetchPostEnd,
   setOpenNewPost,
@@ -215,6 +224,8 @@ export const {
   resetPost,
 } = postSlice.actions;
 
+export const selectIsLoadingPage = (state: RootState) =>
+  state.post.isLoadingPage;
 export const selectIsLoadingPost = (state: RootState) =>
   state.post.isLoadingPost;
 export const selectOpenNewPost = (state: RootState) => state.post.openNewPost;

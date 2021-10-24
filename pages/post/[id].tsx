@@ -17,7 +17,11 @@ import {
   selectProfiles,
 } from "../../stores/slices/authSlice";
 
-import { setPost, selectPost } from "../../stores/slices/postSlice";
+import {
+  setPost,
+  selectPost,
+  fetchPageEnd,
+} from "../../stores/slices/postSlice";
 import GoodButton from "../../components/atoms/GoodButton";
 import PostMenu from "../../components/molecules/PostMenu";
 import { AppDispatch } from "../../stores";
@@ -30,6 +34,7 @@ const Post = ({ fetchedPost }: any) => {
     dispatch(setPost(fetchedPost));
     dispatch(fetchAsyncGetProfs());
     dispatch(fetchAsyncGetMyProf());
+    dispatch(fetchPageEnd());
   }, [dispatch]);
 
   const postState = useSelector(selectPost);

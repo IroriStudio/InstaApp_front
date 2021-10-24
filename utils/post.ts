@@ -3,6 +3,8 @@ import {
   apiUrlPost,
   fetchAsyncPatchLiked,
   fetchAsyncPostDelete,
+  fetchPageEnd,
+  fetchPageStart,
 } from "../stores/slices/postSlice";
 import router from "next/router";
 import { setAuthModal } from "../stores/slices/authSlice";
@@ -29,8 +31,9 @@ export const getPostById = async (id) => {
   return { post: post.data };
 };
 
-export const onClickPostDetail = (e, postId) => {
+export const onClickPostDetail = (e, postId, dispatch) => {
   e.preventDefault();
+  dispatch(fetchPageStart());
   router.push(`/post/${postId}`);
 };
 

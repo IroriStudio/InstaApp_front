@@ -28,8 +28,11 @@
   cursor: pointer;
 }
 
-.core_progress {
-  margin-top: 2rem;
-  display: flex;
-  justify-content: center;
+.header_progress {
+  /* margin-right: 2rem; */
+  position: fixed;
+  top: 1rem;
+  z-index: 5;
+  /* display: flex; */
+  /* justify-content: center; */
 }

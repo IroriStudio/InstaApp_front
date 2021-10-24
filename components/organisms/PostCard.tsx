@@ -7,7 +7,7 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import SendIcon from "@mui/icons-material/Send";
-import { Grid } from "@mui/material";
+import { Grid, Skeleton } from "@mui/material";
 import { AvatarGroup } from "@material-ui/lab";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -29,6 +29,7 @@ import PostMenu from "../molecules/PostMenu";
 import GoodButton from "../atoms/GoodButton";
 import { onClickGood, onClickPostDetail } from "../../utils/post";
 import FirstComment from "../molecules/FirstComment";
+import DammyImage from "../atoms/DammyImage";
 
 interface Props {
   post: PROPS_POST;
@@ -89,13 +90,18 @@ const PostCard: React.FC<Props> = ({ post }) => {
           title={postProfile?.nickName}
           subheader={created_on}
         />
-        <Image
-          src={img}
-          alt="image"
-          width={1000}
-          height={600}
-          objectFit="contain"
-        />
+
+        {img ? (
+          <Image
+            src={img}
+            alt="image"
+            width={1000}
+            height={600}
+            objectFit="contain"
+          />
+        ) : (
+          <DammyImage />
+        )}
 
         <CardContent>
           <div style={{ display: "flex" }}>
@@ -135,7 +141,7 @@ const PostCard: React.FC<Props> = ({ post }) => {
           {commentsOnPost.length > 0 ? (
             <Typography>
               <a
-                onClick={(e) => onClickPostDetail(e, id)}
+                onClick={(e) => onClickPostDetail(e, id, dispatch)}
                 className={styles.view_detail_btn}
               >
                 View all comments
@@ -144,7 +150,7 @@ const PostCard: React.FC<Props> = ({ post }) => {
           ) : (
             <Typography>
               <a
-                onClick={(e) => onClickPostDetail(e, id)}
+                onClick={(e) => onClickPostDetail(e, id, dispatch)}
                 className={styles.view_detail_btn}
               >
                 view the detail

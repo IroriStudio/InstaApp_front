@@ -13,11 +13,13 @@ import { MdLogin } from "react-icons/md";
 
 import { CircularProgress, IconButton } from "@mui/material";
 import MyMenu from "../molecules/MyMenu";
+import { selectIsLoadingPage } from "../../stores/slices/postSlice";
 
 const Header: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const profile = useSelector(selectProfile);
   const isLoadingAuth = useSelector(selectIsLoadingAuth);
+  const isLoadingPage = useSelector(selectIsLoadingPage);
 
   return (
     <header>
@@ -28,11 +30,14 @@ const Header: React.FC = () => {
           </a>
         </Link>
 
+        {isLoadingPage && (
+          <div className={styles.header_progress}>
+            <CircularProgress />
+          </div>
+        )}
+
         {profile?.nickName ? (
-          <>
-            {isLoadingAuth && <CircularProgress />}
-            <MyMenu />
-          </>
+          <MyMenu />
         ) : (
           <IconButton
             onClick={() => {

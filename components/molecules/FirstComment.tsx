@@ -10,23 +10,11 @@ import {
 import PostMenu from "./PostMenu";
 import styles from "./FirstComment.module.css";
 const FirstComment: React.FC<any> = ({ comment }) => {
-  const dispatch: AppDispatch = useDispatch();
-
   const profiles = useSelector(selectProfiles);
-  const comments = useSelector(selectComments);
-  const profile = useSelector(selectProfile);
-  const [text, setText] = useState("");
-
-  // const commentsOnPost = comments.filter((comment) => {
-  //   return comment.post === postId;
-  // });
-  // const prof = profiles.filter((prof) => {
-  //   return prof.userProfile === userPost;å
-  // });
   const userComment = profiles.filter(
     (profile) => profile.id == comment?.userComment
   )[0];
-
+  console.log(comment);
   return (
     <div className={styles.first_comment_box}>
       {userComment?.img && (

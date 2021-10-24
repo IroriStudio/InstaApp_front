@@ -4,10 +4,11 @@ import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import Skeleton from "@mui/material/Skeleton";
 import { Grid } from "@material-ui/core";
+import DammyImage from "../atoms/DammyImage";
 
 const LoadingPostCard: React.FC = () => {
   return (
-    <Grid item xs={12} md={4}>
+    <Grid item xs={12} md={6}>
       <Card>
         <CardHeader
           avatar={
@@ -28,7 +29,8 @@ const LoadingPostCard: React.FC = () => {
           }
           subheader={<Skeleton animation="wave" height={10} width="40%" />}
         />
-        <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" />
+        <DammyImage />
+
         <CardContent>
           <React.Fragment>
             <Skeleton

@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Post: React.FC<Props> = ({ post }) => {
-  if (post.img) {
+  if (post?.img) {
     return <PostCard post={post} />;
   }
   return <LoadingPostCard />;

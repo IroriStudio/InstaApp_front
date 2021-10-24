@@ -57,7 +57,7 @@ const PostMenu: React.FC<Props> = ({ id, checked, onClickGood, isMyPost }) => {
         {path == "/" && (
           <MenuItem
             onClick={(e) => {
-              onClickPostDetail(e, id);
+              onClickPostDetail(e, id, dispatch);
             }}
           >
             <MdOutlineCommentBank size={25} />
