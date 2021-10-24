@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
 import { RootState } from "..";
 import {
-  PROPS_COMMENT,
+  POST_COMMENT,
   PROPS_LIKED,
   PROPS_NEWPOST,
   PROPS_POST_ID,
@@ -91,7 +91,7 @@ export const fetchAsyncGetComments = createAsyncThunk(
 
 export const fetchAsyncPostComment = createAsyncThunk(
   "comment/post",
-  async (comment: PROPS_COMMENT) => {
+  async (comment: POST_COMMENT) => {
     const res = await axios.post(apiUrlComment, comment, {
       headers: { Authorization: `JWT ${localStorage.localJWT}` },
     });

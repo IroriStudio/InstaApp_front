@@ -1,0 +1,15 @@
+.comment_input_box {
+  display: flex;
+  margin-top: 1rem;
+}
+.comment_input {
+  flex: 1;
+
+  outline: none;
+  border: none;
+  border-bottom: 0.1rem solid lightgray;
+}
+.comment_sign_in {
+  color: rgb(122, 122, 122);
+  cursor: pointer;
+}

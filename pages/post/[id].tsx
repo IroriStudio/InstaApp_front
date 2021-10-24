@@ -1,6 +1,6 @@
-import { GetStaticPaths, GetStaticProps } from "next";
 import React, { useEffect } from "react";
-
+import { useDispatch, useSelector } from "react-redux";
+import { GetStaticPaths, GetStaticProps } from "next";
 import Image from "next/image";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -10,7 +10,6 @@ import Typography from "@mui/material/Typography";
 import { Grid } from "@mui/material";
 import { AvatarGroup } from "@material-ui/lab";
 import { getAllPostIds, getPostById, onClickGood } from "../../utils/post";
-import { useDispatch, useSelector } from "react-redux";
 import {
   fetchAsyncGetMyProf,
   selectProfile,
@@ -21,13 +20,21 @@ import {
   setPost,
   selectPost,
   fetchPageEnd,
+  selectComments,
 } from "../../stores/slices/postSlice";
 import GoodButton from "../../components/atoms/GoodButton";
 import PostMenu from "../../components/molecules/PostMenu";
 import { AppDispatch } from "../../stores";
 import { fetchAsyncGetProfs } from "../../stores/slices/authSlice";
+import Comments from "../../components/molecules/Comments";
+import CommentInput from "../../components/molecules/CommentInput";
+import { PROPS_POST } from "../../stores/types";
 
-const Post = ({ fetchedPost }: any) => {
+interface Props {
+  fetchedPost: PROPS_POST;
+}
+
+const Post: React.FC<Props> = ({ fetchedPost }) => {
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
@@ -39,6 +46,7 @@ const Post = ({ fetchedPost }: any) => {
 
   const postState = useSelector(selectPost);
   const profiles = useSelector(selectProfiles);
+  const comments = useSelector(selectComments);
   const profile = useSelector(selectProfile);
   const loginId = profile.userProfile;
 
@@ -54,7 +62,9 @@ const Post = ({ fetchedPost }: any) => {
     current: liked,
     new: loginId,
   };
-
+  const commentsOnPost = comments.filter((comment) => {
+    return comment.post === id;
+  });
   const isLikedChecked = liked.some((like) => like === loginId);
 
   return (
@@ -126,28 +136,8 @@ const Post = ({ fetchedPost }: any) => {
                   : "Be the first to like this"}
               </Typography>
             </div>
-
-            {/* <Comments
-            postId={postId}
-            userPost={userPost}
-            created_on={created_on}
-          /> */}
-            {/* <form className={styles.post_input_box}>
-            <input
-              className={styles.post_input}
-              type="text"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-            />
-
-            <IconButton
-              disabled={!text.length}
-              type="submit"
-              onClick={postComment}
-            >
-              <SendIcon />
-            </IconButton>
-          </form> */}
+            <Comments comments={commentsOnPost} />
+            <CommentInput post={postState} />
           </CardContent>
         </Card>
       </Grid>

@@ -53,19 +53,11 @@ export interface PROPS_LIKED {
   new: number;
 }
 
-export interface PROPS_COMMENT {
+export interface POST_COMMENT {
   text: string;
   post: number;
 }
 
-// export interface PROPS_POST {
-//   id: any;
-//   userPost: any;
-//   title: any;
-//   img: any;
-//   liked: any[];
-//   created_on: string;
-// }
 export interface PROPS_POST {
   id: number;
   userPost: number;

@@ -9,22 +9,6 @@
   align-items: center;
 }
 
-.post_input_box {
-  display: flex;
-  margin-top: 1rem;
-}
-.post_input {
-  flex: 1;
-
-  outline: none;
-  border: none;
-  border-bottom: 0.1rem solid lightgray;
-}
-.post_sign_in {
-  color: rgb(122, 122, 122);
-  cursor: pointer;
-}
-
 .view_detail_btn {
   cursor: pointer;
   margin: 1rem 0;

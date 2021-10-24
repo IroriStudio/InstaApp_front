@@ -17,7 +17,6 @@ import {
 import {
   resetOpenNewPost,
   setOpenNewPost,
-  resetPost,
 } from "../../stores/slices/postSlice";
 import { useRouter } from "next/router";
 

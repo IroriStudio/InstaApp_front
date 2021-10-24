@@ -3,11 +3,7 @@ import Link from "next/link";
 import styles from "./Header.module.css";
 import { AppDispatch } from "../../stores";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectIsLoadingAuth,
-  selectProfile,
-  setAuthModal,
-} from "../../stores/slices/authSlice";
+import { selectProfile, setAuthModal } from "../../stores/slices/authSlice";
 
 import { MdLogin } from "react-icons/md";
 
@@ -18,7 +14,6 @@ import { selectIsLoadingPage } from "../../stores/slices/postSlice";
 const Header: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const profile = useSelector(selectProfile);
-  const isLoadingAuth = useSelector(selectIsLoadingAuth);
   const isLoadingPage = useSelector(selectIsLoadingPage);
 
   return (

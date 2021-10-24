@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./Auth.module.css";
 import Modal from "react-modal";
-
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectIsOpenAuthModal,

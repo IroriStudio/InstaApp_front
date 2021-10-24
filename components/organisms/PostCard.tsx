@@ -5,17 +5,10 @@ import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import SendIcon from "@mui/icons-material/Send";
-import { Grid, Skeleton } from "@mui/material";
+import { Grid } from "@mui/material";
 import { AvatarGroup } from "@material-ui/lab";
-
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectProfile,
-  selectProfiles,
-  setAuthModal,
-} from "../../stores/slices/authSlice";
+import { selectProfile, selectProfiles } from "../../stores/slices/authSlice";
 import {
   fetchAsyncPostComment,
   fetchPostEnd,
@@ -28,8 +21,9 @@ import styles from "./PostCard.module.css";
 import PostMenu from "../molecules/PostMenu";
 import GoodButton from "../atoms/GoodButton";
 import { onClickGood, onClickPostDetail } from "../../utils/post";
-import FirstComment from "../molecules/FirstComment";
+import Comment from "../molecules/Comment";
 import DammyImage from "../atoms/DammyImage";
+import CommentInput from "../molecules/CommentInput";
 
 interface Props {
   post: PROPS_POST;
@@ -90,7 +84,6 @@ const PostCard: React.FC<Props> = ({ post }) => {
           title={postProfile?.nickName}
           subheader={created_on}
         />
-
         {img ? (
           <Image
             src={img}
@@ -137,7 +130,7 @@ const PostCard: React.FC<Props> = ({ post }) => {
                 : "Be the first to like this"}
             </Typography>
           </div>
-          <FirstComment comment={commentsOnPost[0]} />
+          <Comment comments={commentsOnPost} />
           {commentsOnPost.length > 0 ? (
             <Typography>
               <a
@@ -157,46 +150,7 @@ const PostCard: React.FC<Props> = ({ post }) => {
               </a>
             </Typography>
           )}
-
-          {profile.nickName ? (
-            <form className={styles.post_input_box}>
-              <input
-                className={styles.post_input}
-                type="text"
-                placeholder="comment to this post"
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-              />
-
-              <IconButton
-                disabled={!text.length}
-                type="submit"
-                onClick={postComment}
-              >
-                <SendIcon />
-              </IconButton>
-            </form>
-          ) : (
-            <div className={styles.post_input_box}>
-              <div className={styles.post_input}>
-                <Typography>
-                  <a
-                    onClick={() => {
-                      dispatch(setAuthModal(true));
-                    }}
-                    className={styles.post_sign_in}
-                  >
-                    Sign In
-                  </a>
-                  {"  "}
-                  to good or comment
-                </Typography>
-              </div>
-              <IconButton disabled={true}>
-                <SendIcon />
-              </IconButton>
-            </div>
-          )}
+          <CommentInput post={post} />
         </CardContent>
       </Card>
     </Grid>

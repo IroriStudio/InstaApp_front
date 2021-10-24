@@ -117,7 +117,7 @@ const EditProfile: React.FC = () => {
           </div>
           <br />
           <Button
-            disabled={!nickName || !image}
+            disabled={!nickName}
             variant="contained"
             color="primary"
             type="submit"

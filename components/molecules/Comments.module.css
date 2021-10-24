@@ -1,20 +1,13 @@
-.comments_box {
-  padding: 10px;
-  outline: none;
-  border: none;
-  margin-top: 1rem;
-  /* border-top: 1px solid lightgray; */
+.comments_container {
+  max-height: 12rem;
+  overflow-y: auto;
+  overflow-wrap: anywhere;
 }
 .comment_box {
   display: flex;
-  align-items: center;
-  width: 100%;
 }
+
 .comment_nickname {
-  font-size: 0.8rem;
-  margin: 0 0.5rem;
-}
-.comment_text {
-  font-size: 0.8rem;
-  flex: 1;
+  max-width: 10rem;
+  margin-right: 0.8rem;
 }

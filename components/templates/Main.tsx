@@ -16,8 +16,6 @@ import {
 } from "../../stores/slices/postSlice";
 
 import Post from "./Post";
-import EditProfile from "../organisms/EditProfileModal";
-import NewPost from "../organisms/NewPostModal";
 import { AppDispatch } from "../../stores";
 
 const Main: React.FC = () => {

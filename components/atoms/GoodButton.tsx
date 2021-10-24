@@ -1,9 +1,8 @@
 import React from "react";
-import { Checkbox, Grid, makeStyles } from "@mui/material";
+import { Checkbox } from "@mui/material";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { useSelector } from "react-redux";
 import { selectProfile } from "../../stores/slices/authSlice";
-import { PROPS_POST } from "../../stores/types";
 
 interface Props {
   checked: boolean;
