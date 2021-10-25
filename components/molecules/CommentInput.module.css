@@ -4,7 +4,6 @@
 }
 .comment_input {
   flex: 1;
-
   outline: none;
   border: none;
   border-bottom: 0.1rem solid lightgray;

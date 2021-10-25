@@ -40,7 +40,7 @@ const Comments: React.FC<Props> = ({ comments }) => {
                 </p>
               </Typography>
               <Typography>
-                <p className={styles.comment_text}>{comment?.text}</p>
+                <p>{comment?.text}</p>
               </Typography>
             </>
           )}

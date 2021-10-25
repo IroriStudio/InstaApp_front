@@ -9,7 +9,7 @@
 }
 
 .comment_text {
-  width: 11rem;
+  width: 23rem;
   margin: 0;
   text-overflow: ellipsis;
   white-space: nowrap;

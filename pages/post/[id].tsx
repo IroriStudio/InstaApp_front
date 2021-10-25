@@ -80,12 +80,11 @@ const Post: React.FC<Props> = ({ fetchedPost }) => {
             avatar={<Avatar alt="my avatar" src={postProfile?.img} />}
             action={
               <PostMenu
-                id={id}
+                post={postState}
                 checked={isLikedChecked}
                 onClickGood={async () => {
                   await onClickGood(packet, profile, dispatch);
                 }}
-                isMyPost={profile.userProfile === userPost}
               />
             }
             title={postProfile?.nickName}

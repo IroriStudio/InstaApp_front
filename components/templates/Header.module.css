@@ -15,13 +15,9 @@
 }
 .header_btn {
   background-color: transparent;
-  /* justify-content: center;
-  text-align: center; */
-  /* background-color: red; */
   color: gray;
   width: 4rem;
   height: 4rem;
-  /* font-size: 2rem; */
   margin-top: 0.6rem;
   border: none;
   outline: none;
@@ -29,10 +25,7 @@
 }
 
 .header_progress {
-  /* margin-right: 2rem; */
   position: fixed;
   top: 1rem;
   z-index: 5;
-  /* display: flex; */
-  /* justify-content: center; */
 }

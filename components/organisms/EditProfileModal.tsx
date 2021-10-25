@@ -1,5 +1,4 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, IconButton, TextField, Avatar } from "@mui/material";
 import Modal from "react-modal";
@@ -98,7 +97,7 @@ const EditProfile: React.FC = () => {
             id="imageInput"
             hidden={true}
           />
-          <div className={styles.edit_prof_avatar}>
+          <div>
             <img
               id="preview"
               src={avatarUrl}

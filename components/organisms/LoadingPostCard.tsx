@@ -30,7 +30,6 @@ const LoadingPostCard: React.FC = () => {
           subheader={<Skeleton animation="wave" height={10} width="40%" />}
         />
         <DammyImage />
-
         <CardContent>
           <React.Fragment>
             <Skeleton

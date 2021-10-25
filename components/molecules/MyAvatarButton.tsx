@@ -3,7 +3,6 @@ import { Badge, Avatar, withStyles } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProfile, setOpenProfile } from "../../stores/slices/authSlice";
 import { AppDispatch } from "../../stores";
-import { resetOpenNewPost } from "../../stores/slices/postSlice";
 
 const StyledBadge = withStyles((theme) => ({
   badge: {
@@ -35,17 +34,10 @@ const StyledBadge = withStyles((theme) => ({
 }))(Badge);
 
 const MyAvatarButton: React.FC = () => {
-  const dispatch: AppDispatch = useDispatch();
   const profile = useSelector(selectProfile);
-
-  const onClickAvater = () => {
-    dispatch(setOpenProfile());
-    dispatch(resetOpenNewPost());
-  };
 
   return (
     <button
-      onClick={() => {}}
       style={{ color: "red", backgroundColor: "transparent", border: "none" }}
     >
       <StyledBadge
@@ -53,7 +45,7 @@ const MyAvatarButton: React.FC = () => {
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         variant="dot"
       >
-        <Avatar alt="who?" src={profile.img} />
+        <Avatar alt="who?" src={profile?.img} />
       </StyledBadge>
     </button>
   );

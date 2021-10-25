@@ -3,3 +3,8 @@
   font-weight: normal;
   text-align: center;
 }
+
+.image_preview {
+  width: 10rem;
+  height: 10rem;
+}

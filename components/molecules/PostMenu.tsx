@@ -11,19 +11,20 @@ import GoodButton from "../atoms/GoodButton";
 import { onClickDelete, onClickPostDetail } from "../../utils/post";
 import { selectProfile } from "../../stores/slices/authSlice";
 import { useRouter } from "next/router";
+import { PROPS_POST } from "../../stores/types";
 
 interface Props {
-  id: number;
   checked: boolean;
   onClickGood: () => void;
-  isMyPost: boolean;
+  post: PROPS_POST;
 }
 
-const PostMenu: React.FC<Props> = ({ id, checked, onClickGood, isMyPost }) => {
+const PostMenu: React.FC<Props> = ({ checked, onClickGood, post }) => {
   const dispatch: AppDispatch = useDispatch();
   const profile = useSelector(selectProfile);
   const router = useRouter();
   const path = router.pathname;
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -33,6 +34,8 @@ const PostMenu: React.FC<Props> = ({ id, checked, onClickGood, isMyPost }) => {
   const handleCloseMenu = () => {
     setAnchorEl(null);
   };
+
+  const isMyPost = profile?.userProfile === post?.userPost;
   return (
     <>
       <IconButton aria-label="settings" onClick={handleClickMenu}>
@@ -45,19 +48,21 @@ const PostMenu: React.FC<Props> = ({ id, checked, onClickGood, isMyPost }) => {
         onClick={handleCloseMenu}
       >
         {isMyPost && profile.nickName && (
-          <MenuItem onClick={async () => await onClickDelete(id, dispatch)}>
+          <MenuItem
+            onClick={async () => await onClickDelete(post?.id, dispatch)}
+          >
             <MdDelete size={25} />
             <p className={styles.menu_item}>Delete</p>
           </MenuItem>
         )}
-        <MenuItem>
-          <GoodButton checked={checked} onClickGood={onClickGood} />
+        <MenuItem onClick={onClickGood}>
+          <GoodButton checked={checked} />
           <p className={styles.menu_item}>Good</p>
         </MenuItem>
         {path == "/" && (
           <MenuItem
             onClick={(e) => {
-              onClickPostDetail(e, id, dispatch);
+              onClickPostDetail(e, post?.id, dispatch);
             }}
           >
             <MdOutlineCommentBank size={25} />

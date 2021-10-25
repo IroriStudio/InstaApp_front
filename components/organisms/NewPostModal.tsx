@@ -12,7 +12,7 @@ import {
   selectOpenNewPost,
 } from "../../stores/slices/postSlice";
 import { File } from "../../stores/types";
-import styles from "./EditProfileModal.module.css";
+import styles from "./NewPostModal.module.css";
 
 const customStyles = {
   content: {
@@ -68,6 +68,7 @@ const NewPost: React.FC = () => {
     dispatch(resetOpenNewPost());
   };
   const ModalClose = () => {
+    setTitle("");
     setImage(null);
     dispatch(resetOpenNewPost());
   };
@@ -101,7 +102,7 @@ const NewPost: React.FC = () => {
             hidden={true}
           />
 
-          <div className={styles.edit_prof_avatar}>
+          <div>
             <img
               id="preview"
               src={postUrl}

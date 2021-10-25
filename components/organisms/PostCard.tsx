@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -9,12 +9,7 @@ import { Grid } from "@mui/material";
 import { AvatarGroup } from "@material-ui/lab";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProfile, selectProfiles } from "../../stores/slices/authSlice";
-import {
-  fetchAsyncPostComment,
-  fetchPostEnd,
-  fetchPostStart,
-  selectComments,
-} from "../../stores/slices/postSlice";
+import { selectComments } from "../../stores/slices/postSlice";
 import { AppDispatch } from "../../stores";
 import { PROPS_POST } from "../../stores/types";
 import styles from "./PostCard.module.css";
@@ -36,8 +31,6 @@ const PostCard: React.FC<Props> = ({ post }) => {
   const profile = useSelector(selectProfile);
   const loginId = profile.userProfile;
 
-  const [text, setText] = useState("");
-
   const { id, userPost, title, img, liked, created_on } = post;
 
   const commentsOnPost = comments.filter((comment) => {
@@ -48,14 +41,6 @@ const PostCard: React.FC<Props> = ({ post }) => {
     return prof.userProfile === userPost;
   })[0];
 
-  const postComment = async (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    const packet = { text: text, post: id };
-    await dispatch(fetchPostStart());
-    await dispatch(fetchAsyncPostComment(packet));
-    await dispatch(fetchPostEnd());
-    setText("");
-  };
   const checked = profile.nickName
     ? liked.some((like) => like === loginId)
     : false;
@@ -66,6 +51,7 @@ const PostCard: React.FC<Props> = ({ post }) => {
     current: liked,
     new: loginId,
   };
+
   return (
     <Grid item xs={12} md={6}>
       <Card>
@@ -73,12 +59,11 @@ const PostCard: React.FC<Props> = ({ post }) => {
           avatar={<Avatar alt="my avatar" src={postProfile?.img} />}
           action={
             <PostMenu
-              id={id}
               checked={checked}
               onClickGood={async () => {
                 await onClickGood(packet, profile, dispatch);
               }}
-              isMyPost={profile.userProfile === userPost}
+              post={post}
             />
           }
           title={postProfile?.nickName}

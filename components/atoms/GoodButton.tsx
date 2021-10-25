@@ -6,7 +6,7 @@ import { selectProfile } from "../../stores/slices/authSlice";
 
 interface Props {
   checked: boolean;
-  onClickGood: () => void;
+  onClickGood?: () => void;
 }
 
 const GoodButton: React.FC<Props> = ({ checked, onClickGood }) => {
