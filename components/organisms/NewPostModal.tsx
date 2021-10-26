@@ -67,6 +67,7 @@ const NewPost: React.FC = () => {
     setImage(null);
     dispatch(resetOpenNewPost());
   };
+
   const ModalClose = () => {
     setTitle("");
     setImage(null);

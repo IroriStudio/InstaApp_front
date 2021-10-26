@@ -73,11 +73,17 @@ const EditProfile: React.FC = () => {
     };
   };
 
+  const ModalClose = () => {
+    setNickname("");
+    setImage(null);
+    dispatch(resetOpenProfile());
+  };
+
   return (
     <>
       <Modal
         isOpen={openProfile}
-        onRequestClose={() => dispatch(resetOpenProfile())}
+        onRequestClose={ModalClose}
         style={customStyles}
       >
         <form style={{ textAlign: "center" }}>
@@ -105,9 +111,13 @@ const EditProfile: React.FC = () => {
                 width: "10rem",
                 height: "10rem",
                 borderRadius: "5rem",
+                borderColor: "transparent",
+                backgroundColor: "transparent",
                 objectFit: "cover",
               }}
+              hidden={image ? false : true}
             ></img>
+
             <div style={{ width: "100%" }}>
               <IconButton onClick={onClickButton}>
                 <MdAddAPhoto />
