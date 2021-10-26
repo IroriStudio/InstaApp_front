@@ -8,8 +8,8 @@ import {
   PROPS_POST_ID,
 } from "../types";
 
-export const apiUrlPost = `${process.env.NEXT_PUBLIC_DEV_API_URL}api/post/`;
-export const apiUrlComment = `${process.env.NEXT_PUBLIC_DEV_API_URL}api/comment/`;
+export const apiUrlPost = `https://iroristudio.pythonanywhere.com/api/post/`;
+export const apiUrlComment = `https://iroristudio.pythonanywhere.com/api/comment/`;
 
 export const fetchAsyncGetPosts = createAsyncThunk("post/get", async () => {
   const res = await axios.get(apiUrlPost);
