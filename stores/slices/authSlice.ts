@@ -9,7 +9,7 @@ import {
   PROPS_PROFILE,
 } from "../types";
 
-const apiUrl = "https://iroristudio.pythonanywhere.com/";
+const apiUrl = process.env.NEXT_PUBLIC_DEV_API_URL;
 
 export const fetchAsyncLogin = createAsyncThunk(
   "auth/post",

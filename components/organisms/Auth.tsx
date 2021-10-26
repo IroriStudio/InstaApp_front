@@ -31,7 +31,7 @@ const AuthModal: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
   return (
-    <>
+    <div>
       <Modal
         isOpen={isOpenAuthModal}
         style={customStyles}
@@ -41,7 +41,7 @@ const AuthModal: React.FC = () => {
         <AuthForm />
         <ChangeAuthModeText />
       </Modal>
-    </>
+    </div>
   );
 };
 

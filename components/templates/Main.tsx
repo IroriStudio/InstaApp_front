@@ -36,16 +36,14 @@ const Main: React.FC = () => {
 
   return (
     <div>
-      <>
-        <Grid container spacing={4}>
-          {posts
-            .slice(0)
-            .reverse()
-            .map((post) => (
-              <Post key={post.id} post={post} />
-            ))}
-        </Grid>
-      </>
+      <Grid container spacing={4}>
+        {posts
+          .slice(0)
+          .reverse()
+          .map((post) => (
+            <Post key={post.id} post={post} />
+          ))}
+      </Grid>
     </div>
   );
 };

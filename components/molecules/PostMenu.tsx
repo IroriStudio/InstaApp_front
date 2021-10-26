@@ -37,7 +37,7 @@ const PostMenu: React.FC<Props> = ({ checked, onClickGood, post }) => {
 
   const isMyPost = profile?.userProfile === post?.userPost;
   return (
-    <>
+    <div>
       <IconButton aria-label="settings" onClick={handleClickMenu}>
         <MoreVertIcon />
       </IconButton>
@@ -70,7 +70,7 @@ const PostMenu: React.FC<Props> = ({ checked, onClickGood, post }) => {
           </MenuItem>
         )}
       </Menu>
-    </>
+    </div>
   );
 };
 

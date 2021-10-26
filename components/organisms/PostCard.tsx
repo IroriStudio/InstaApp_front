@@ -116,15 +116,14 @@ const PostCard: React.FC<Props> = ({ post }) => {
             </Typography>
           </div>
           <Comment comments={commentsOnPost} />
+
           {commentsOnPost.length > 0 ? (
-            <Typography>
-              <a
-                onClick={(e) => onClickPostDetail(e, id, dispatch)}
-                className={styles.view_detail_btn}
-              >
-                View all comments
-              </a>
-            </Typography>
+            <a
+              onClick={(e) => onClickPostDetail(e, id, dispatch)}
+              className={styles.view_detail_btn}
+            >
+              <Typography>View all comments </Typography>
+            </a>
           ) : (
             <Typography>
               <a

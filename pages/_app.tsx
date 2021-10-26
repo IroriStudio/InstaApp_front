@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Provider } from "react-redux";
 import Layout from "../components/Layout";
 import { store } from "../stores";
+import "../styles/global.css";
 
 function MyApp({ Component, pageProps }) {
   return (

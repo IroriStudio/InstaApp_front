@@ -8,10 +8,10 @@
 }
 
 .header_nav {
-  background-color: white;
-  padding: 2rem 15rem;
+  padding: 2rem;
   display: flex;
   justify-content: center;
+  overflow-wrap: auto;
 }
 .header_btn {
   background-color: transparent;
