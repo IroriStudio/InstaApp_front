@@ -122,7 +122,7 @@ const PostCard: React.FC<Props> = ({ post }) => {
               onClick={(e) => onClickPostDetail(e, id, dispatch)}
               className={styles.view_detail_btn}
             >
-              <Typography>View all comments </Typography>
+              <Typography>All comments </Typography>
             </a>
           ) : (
             <Typography>
@@ -130,7 +130,7 @@ const PostCard: React.FC<Props> = ({ post }) => {
                 onClick={(e) => onClickPostDetail(e, id, dispatch)}
                 className={styles.view_detail_btn}
               >
-                view the detail
+                The detail
               </a>
             </Typography>
           )}

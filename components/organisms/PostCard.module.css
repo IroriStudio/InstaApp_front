@@ -10,7 +10,7 @@
 
 .view_detail_btn {
   cursor: pointer;
-  margin-top: 3rem;
+  /* margin-top: 5rem; */
   color: rgb(122, 122, 122);
   display: block;
 }

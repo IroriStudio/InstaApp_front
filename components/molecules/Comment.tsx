@@ -32,12 +32,10 @@ const Comment: React.FC<Props> = ({ comments }) => {
               zIndex: 0,
             }}
           />
-          <Typography>
-            <p className={styles.comment_nickname}>{userComment.nickName}</p>
-          </Typography>
-          <Typography>
-            <p className={styles.comment_text}>{firstComment?.text}</p>
-          </Typography>
+
+          <p className={styles.comment_nickname}>{userComment.nickName}</p>
+
+          <p className={styles.comment_text}>{firstComment?.text}</p>
         </>
       )}
     </div>

@@ -16,12 +16,11 @@ const Comments: React.FC<Props> = ({ comments }) => {
       (profile) => profile.userProfile == comment?.userComment
     )[0];
   };
-
   return (
     <div className={styles.comments_container}>
       {comments.map((comment) => (
         <div className={styles.comment_box} key={comment.id}>
-          {userComment(comment)?.img && (
+          {userComment(comment)?.nickName && (
             <>
               <Avatar
                 alt="user"
@@ -34,14 +33,12 @@ const Comments: React.FC<Props> = ({ comments }) => {
                   zIndex: 0,
                 }}
               />
-              <Typography>
-                <p className={styles.comment_nickname}>
-                  {userComment(comment).nickName}
-                </p>
-              </Typography>
-              <Typography>
-                <p>{comment?.text}</p>
-              </Typography>
+
+              <p className={styles.comment_nickname}>
+                {userComment(comment)?.nickName}
+              </p>
+
+              <p>{comment?.text}</p>
             </>
           )}
         </div>

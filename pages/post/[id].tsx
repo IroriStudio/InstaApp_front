@@ -101,10 +101,10 @@ const Post: React.FC<Props> = ({ fetchedPost }) => {
           )}
           <CardContent>
             <div style={{ display: "flex" }}>
-              <Typography mt={1} mr={1}>
+              <p>
                 <strong>{postProfile?.nickName}</strong>
-              </Typography>
-              <Typography mt={1}>{title}</Typography>
+              </p>
+              <p>{title}</p>
             </div>
             <div style={{ display: "flex", zIndex: 0 }}>
               <GoodButton

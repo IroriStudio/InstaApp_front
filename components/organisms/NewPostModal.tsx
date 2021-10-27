@@ -18,9 +18,9 @@ const customStyles = {
   content: {
     top: "55%",
     left: "50%",
-    width: 280,
-    height: 400,
-    padding: "50px",
+    width: "450px",
+    height: "500px",
+
     transform: "translate(-50%, -50%)",
   },
   overlay: {
@@ -108,13 +108,13 @@ const NewPost: React.FC = () => {
               id="preview"
               src={postUrl}
               style={{
-                width: "100%",
-                height: "20rem",
+                // width: "100%",
+                // height: "20rem",
                 objectFit: "contain",
                 border: "none",
               }}
-              hidden={image ? false : true}
-            ></img>
+              hidden={false}
+            />
 
             <div style={{ width: "100%" }}>
               <IconButton onClick={onClickButton}>
