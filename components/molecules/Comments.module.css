@@ -1,13 +1,11 @@
 .comments_container {
   max-height: 12rem;
   overflow-y: auto;
-  overflow-wrap: anywhere;
 }
 .comment_box {
   display: flex;
 }
 
 .comment_nickname {
-  max-width: 10rem;
   margin-right: 0.8rem;
 }

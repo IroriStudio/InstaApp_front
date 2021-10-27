@@ -9,9 +9,10 @@
 }
 
 .comment_text {
-  /* width: 23rem; */
+  width: 10rem;
   margin: 0;
-  /* text-overflow: ellipsis;
+  background-color: "red";
+  text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden; */
+  overflow: hidden;
 }

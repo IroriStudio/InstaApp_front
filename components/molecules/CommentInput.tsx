@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import SendIcon from "@mui/icons-material/Send";
 import { useDispatch, useSelector } from "react-redux";
@@ -56,18 +55,16 @@ const CommentInput: React.FC<Props> = ({ post }) => {
       ) : (
         <div className={styles.comment_input_box}>
           <div className={styles.comment_input}>
-            <Typography>
-              <a
-                onClick={() => {
-                  dispatch(setAuthModal(true));
-                }}
-                className={styles.comment_sign_in}
-              >
-                Sign In
-              </a>
-              {"  "}
-              to good or comment
-            </Typography>
+            <a
+              onClick={() => {
+                dispatch(setAuthModal(true));
+              }}
+              className={styles.comment_sign_in}
+            >
+              Sign In
+            </a>
+            {"  "}
+            to good or comment
           </div>
           <IconButton disabled={true}>
             <SendIcon />

@@ -18,8 +18,8 @@ const customStyles = {
   content: {
     top: "55%",
     left: "50%",
-    width: 280,
-    height: 450,
+    width: "350px",
+    height: "450px",
     padding: "5rem",
     transform: "translate(-50%, -50%)",
     border: "none",
@@ -57,6 +57,7 @@ const EditProfile: React.FC = () => {
 
   const imageHander = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files === null) {
+      setImage(null);
       return;
     }
     const file = event.target.files![0];
@@ -78,7 +79,7 @@ const EditProfile: React.FC = () => {
     setImage(null);
     dispatch(resetOpenProfile());
   };
-
+  console.log("image", image);
   return (
     <>
       <Modal
@@ -104,20 +105,22 @@ const EditProfile: React.FC = () => {
             hidden={true}
           />
           <div>
-            <img
-              id="preview"
-              src={avatarUrl}
-              style={{
-                width: "10rem",
-                height: "10rem",
-                borderRadius: "5rem",
-                borderColor: "transparent",
-                backgroundColor: "transparent",
-                objectFit: "cover",
-              }}
-              hidden={image ? false : true}
-            ></img>
-
+            {image ? (
+              <img
+                id="preview"
+                src={avatarUrl}
+                style={{
+                  width: "10rem",
+                  height: "10rem",
+                  borderRadius: "10rem",
+                  objectFit: "cover",
+                  margin: "0 auto",
+                }}
+                hidden={image ? true : false}
+              />
+            ) : (
+              <img id="preview" />
+            )}
             <div style={{ width: "100%" }}>
               <IconButton onClick={onClickButton}>
                 <MdAddAPhoto />
