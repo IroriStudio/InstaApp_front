@@ -16,6 +16,7 @@ const Comments: React.FC<Props> = ({ comments }) => {
       (profile) => profile.userProfile == comment?.userComment
     )[0];
   };
+
   return (
     <div className={styles.comments_container}>
       {comments.map((comment) => (
