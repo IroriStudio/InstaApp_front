@@ -1,9 +1,8 @@
 import React from "react";
-import { Avatar, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
+import { Avatar } from "@mui/material";
 import { selectProfiles } from "../../stores/slices/authSlice";
 import { PROPS_COMMENT } from "../../utils/types";
-
 import styles from "./Comments.module.css";
 
 interface Props {

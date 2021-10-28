@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, IconButton, TextField, Avatar } from "@mui/material";
 import Modal from "react-modal";
-import styles from "./EditProfileModal.module.css";
+import { MdAddAPhoto } from "react-icons/md";
 import { AppDispatch } from "../../stores";
 import {
   fetchAsyncUpdateProf,
@@ -12,8 +12,9 @@ import {
   selectOpenProfile,
   selectProfile,
 } from "../../stores/slices/authSlice";
+import styles from "./EditProfileModal.module.css";
 import { File } from "../../stores/types";
-import { MdAddAPhoto } from "react-icons/md";
+
 const customStyles = {
   content: {
     top: "55%",
@@ -55,12 +56,12 @@ const EditProfile: React.FC = () => {
     fileInput.click();
   };
 
-  const imageHander = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files === null) {
+  const imageHander = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files === null) {
       setImage(null);
       return;
     }
-    const file = event.target.files![0];
+    const file = e.target.files![0];
     setImage(file);
     if (file === null) {
       return;

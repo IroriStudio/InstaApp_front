@@ -1,14 +1,14 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import IconButton from "@mui/material/IconButton";
 import SendIcon from "@mui/icons-material/Send";
-import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../../stores";
 import { selectProfile, setAuthModal } from "../../stores/slices/authSlice";
 import {
   fetchAsyncPostComment,
   fetchPostEnd,
   fetchPostStart,
 } from "../../stores/slices/postSlice";
-import { AppDispatch } from "../../stores";
 import styles from "./CommentInput.module.css";
 import { PROPS_POST } from "../../stores/types";
 

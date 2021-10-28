@@ -1,8 +1,6 @@
 import React, { ReactNode } from "react";
 import Head from "next/head";
 import Header from "./templates/Header";
-import { Provider } from "react-redux";
-import { store } from "../stores";
 import Auth from "./organisms/Auth";
 import EditProfile from "./organisms/EditProfileModal";
 import NewPost from "./organisms/NewPostModal";
@@ -11,7 +9,7 @@ interface Props {
   children?: ReactNode;
 }
 
-const Layout = ({ children }: Props) => {
+const Layout: React.FC<Props> = ({ children }) => {
   return (
     <>
       <Head>

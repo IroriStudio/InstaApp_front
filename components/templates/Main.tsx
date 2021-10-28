@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Grid } from "@mui/material";
-import Auth from "../organisms/Auth";
 import {
   fetchAsyncGetMyProf,
   fetchAsyncGetProfs,
@@ -8,7 +8,6 @@ import {
   setAuthModal,
 } from "../../stores/slices/authSlice";
 
-import { useDispatch, useSelector } from "react-redux";
 import {
   fetchAsyncGetComments,
   fetchAsyncGetPosts,
@@ -20,7 +19,6 @@ import { AppDispatch } from "../../stores";
 
 const Main: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
-  const profile = useSelector(selectProfile);
   const posts = useSelector(selectPosts);
 
   useEffect(() => {

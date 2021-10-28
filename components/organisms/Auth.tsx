@@ -1,15 +1,14 @@
 import React from "react";
-import styles from "./Auth.module.css";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../../stores";
 import {
   selectIsOpenAuthModal,
   setAuthModal,
 } from "../../stores/slices/authSlice";
-
 import ChangeAuthModeText from "../atoms/ChangeAuthModeText";
 import AuthForm from "../molecules/AuthForm";
-import { AppDispatch } from "../../stores";
+import styles from "./Auth.module.css";
 
 const customStyles = {
   content: {

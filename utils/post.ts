@@ -3,7 +3,6 @@ import {
   apiUrlPost,
   fetchAsyncPatchLiked,
   fetchAsyncPostDelete,
-  fetchPageEnd,
   fetchPageStart,
 } from "../stores/slices/postSlice";
 import router from "next/router";

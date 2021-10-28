@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
 import { MdDelete, MdOutlineCommentBank } from "react-icons/md";
 import { AppDispatch } from "../../stores";
-import styles from "./PostMenu.module.css";
-import GoodButton from "../atoms/GoodButton";
-import { onClickDelete, onClickPostDetail } from "../../utils/post";
 import { selectProfile } from "../../stores/slices/authSlice";
-import { useRouter } from "next/router";
+import { onClickDelete, onClickPostDetail } from "../../utils/post";
+import GoodButton from "../atoms/GoodButton";
+import styles from "./PostMenu.module.css";
 import { PROPS_POST } from "../../stores/types";
 
 interface Props {

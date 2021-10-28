@@ -1,15 +1,13 @@
 import React from "react";
-import Link from "next/link";
-import styles from "./Header.module.css";
-import { AppDispatch } from "../../stores";
 import { useDispatch, useSelector } from "react-redux";
-import { selectProfile, setAuthModal } from "../../stores/slices/authSlice";
-
-import { MdLogin } from "react-icons/md";
-
+import Link from "next/link";
 import { CircularProgress, IconButton } from "@mui/material";
-import MyMenu from "../molecules/MyMenu";
+import { MdLogin } from "react-icons/md";
 import { selectIsLoadingPage } from "../../stores/slices/postSlice";
+import { selectProfile, setAuthModal } from "../../stores/slices/authSlice";
+import { AppDispatch } from "../../stores";
+import MyMenu from "../molecules/MyMenu";
+import styles from "./Header.module.css";
 
 const Header: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();

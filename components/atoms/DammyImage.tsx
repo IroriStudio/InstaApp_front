@@ -1,5 +1,5 @@
-import { Skeleton } from "@mui/material";
 import React from "react";
+import { Skeleton } from "@mui/material";
 
 const DammyImage: React.FC = () => {
   return (

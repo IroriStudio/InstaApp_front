@@ -1,9 +1,8 @@
 import React from "react";
-import styles from "./ChangeAuthModeText.module.css";
-
 import { useDispatch, useSelector } from "react-redux";
-import { selectAuthMode, changeAuthMode } from "../../stores/slices/authSlice";
+import styles from "./ChangeAuthModeText.module.css";
 import { AppDispatch } from "../../stores";
+import { selectAuthMode, changeAuthMode } from "../../stores/slices/authSlice";
 
 const ChangeAuthModeText: React.FC = () => {
   const authMode = useSelector(selectAuthMode);

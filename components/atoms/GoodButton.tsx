@@ -1,7 +1,7 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Checkbox } from "@mui/material";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
-import { useSelector } from "react-redux";
 import { selectProfile } from "../../stores/slices/authSlice";
 
 interface Props {

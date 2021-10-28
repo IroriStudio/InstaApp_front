@@ -1,10 +1,8 @@
-import { Avatar, Typography } from "@mui/material";
 import React from "react";
+import { Avatar } from "@mui/material";
 import { useSelector } from "react-redux";
-import {} from "../../stores";
-import { selectProfiles } from "../../stores/slices/authSlice";
-
 import styles from "./Comment.module.css";
+import { selectProfiles } from "../../stores/slices/authSlice";
 import { PROPS_COMMENT } from "../../utils/types";
 
 interface Props {

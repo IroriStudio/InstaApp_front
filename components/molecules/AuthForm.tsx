@@ -1,7 +1,7 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Formik } from "formik";
 import { object, string } from "yup";
-import { useDispatch, useSelector } from "react-redux";
 import { CircularProgress, TextField } from "@material-ui/core";
 import styles from "./AuthForm.module.css";
 import {

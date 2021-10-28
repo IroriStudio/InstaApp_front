@@ -27,6 +27,7 @@ const customStyles = {
     backgroundColor: "rgba(0,0,0,0.85)",
   },
 };
+
 const NewPost: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const openNewPost = useSelector(selectOpenNewPost);
@@ -108,14 +109,11 @@ const NewPost: React.FC = () => {
               id="preview"
               src={postUrl}
               style={{
-                // width: "100%",
-                // height: "20rem",
                 objectFit: "contain",
                 border: "none",
               }}
               hidden={false}
             />
-
             <div style={{ width: "100%" }}>
               <IconButton onClick={onClickButton}>
                 <MdAddAPhoto />
@@ -123,7 +121,6 @@ const NewPost: React.FC = () => {
             </div>
           </div>
           <br />
-
           <Button
             disabled={!title || !image}
             variant="contained"

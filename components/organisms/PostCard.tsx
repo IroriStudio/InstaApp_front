@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
@@ -7,18 +8,17 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import { Grid } from "@mui/material";
 import { AvatarGroup } from "@material-ui/lab";
-import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../../stores";
 import { selectProfile, selectProfiles } from "../../stores/slices/authSlice";
 import { selectComments } from "../../stores/slices/postSlice";
-import { AppDispatch } from "../../stores";
-import { PROPS_POST } from "../../stores/types";
-import styles from "./PostCard.module.css";
+import { onClickGood, onClickPostDetail } from "../../utils/post";
 import PostMenu from "../molecules/PostMenu";
 import GoodButton from "../atoms/GoodButton";
-import { onClickGood, onClickPostDetail } from "../../utils/post";
 import Comment from "../molecules/Comment";
 import DammyImage from "../atoms/DammyImage";
 import CommentInput from "../molecules/CommentInput";
+import styles from "./PostCard.module.css";
+import { PROPS_POST } from "../../stores/types";
 
 interface Props {
   post: PROPS_POST;

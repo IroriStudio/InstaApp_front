@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
 import { MdExitToApp, MdAddAPhoto, MdEdit } from "react-icons/md";
 import { Badge, Avatar, withStyles } from "@material-ui/core";
-
 import { AppDispatch } from "../../stores";
-import styles from "./PostMenu.module.css";
 import {
   editNickname,
   resetOpenProfile,
@@ -18,7 +17,7 @@ import {
   resetOpenNewPost,
   setOpenNewPost,
 } from "../../stores/slices/postSlice";
-import { useRouter } from "next/router";
+import styles from "./PostMenu.module.css";
 
 interface Props {
   id: number;

@@ -1,8 +1,7 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Badge, Avatar, withStyles } from "@material-ui/core";
-import { useDispatch, useSelector } from "react-redux";
-import { selectProfile, setOpenProfile } from "../../stores/slices/authSlice";
-import { AppDispatch } from "../../stores";
+import { selectProfile } from "../../stores/slices/authSlice";
 
 const StyledBadge = withStyles((theme) => ({
   badge: {
