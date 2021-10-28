@@ -20,7 +20,6 @@ import styles from "./index.module.css";
 
 const IndexPage: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
-  const isLoadingPage = useSelector(selectIsLoadingPage);
   const posts = useSelector(selectPosts);
 
   useEffect(() => {
@@ -36,11 +35,6 @@ const IndexPage: React.FC = () => {
 
   return (
     <div>
-      {isLoadingPage && (
-        <div className={styles.header_progress}>
-          <CircularProgress />
-        </div>
-      )}
       <Grid container spacing={4}>
         {posts
           .slice(0)
