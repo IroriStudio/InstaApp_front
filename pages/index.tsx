@@ -15,6 +15,7 @@ import {
 
 import Post from "../components/templates/Post";
 import { AppDispatch } from "../stores";
+import Layout from "../components/Layout";
 
 const IndexPage: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -32,7 +33,7 @@ const IndexPage: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <Layout title="IroriStudio">
       <Grid container spacing={4}>
         {posts
           .slice(0)
@@ -41,7 +42,7 @@ const IndexPage: React.FC = () => {
             <Post key={post.id} post={post} />
           ))}
       </Grid>
-    </div>
+    </Layout>
   );
 };
 
