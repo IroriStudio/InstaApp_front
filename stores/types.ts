@@ -66,6 +66,7 @@ export interface PROPS_POST {
   liked: number[];
   created_on: string;
 }
+
 export interface PROPS_POST_ID {
   postId: number;
 }
