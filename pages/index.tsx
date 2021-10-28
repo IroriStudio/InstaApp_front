@@ -1,42 +1,45 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CircularProgress, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import {
   fetchAsyncGetMyProf,
   fetchAsyncGetProfs,
   setAuthModal,
 } from "../stores/slices/authSlice";
 
-import {
-  fetchAsyncGetComments,
-  fetchAsyncGetPosts,
-  selectIsLoadingPage,
-  selectPosts,
-} from "../stores/slices/postSlice";
+import { fetchAsyncGetComments, setPosts } from "../stores/slices/postSlice";
 
 import Post from "../components/templates/Post";
 import { AppDispatch } from "../stores";
-import styles from "./index.module.css";
+import { GetStaticProps } from "next";
+import { getAllPosts } from "../utils/post";
+import { PROPS_POST } from "../stores/types";
+import { selectPosts } from "../stores/slices/postSlice";
 
-const IndexPage: React.FC = () => {
+interface Props {
+  posts: PROPS_POST[];
+}
+
+const IndexPage: React.FC<Props> = ({ posts }) => {
   const dispatch: AppDispatch = useDispatch();
-  const posts = useSelector(selectPosts);
+  const postsState = useSelector(selectPosts);
 
   useEffect(() => {
     const fetchBootLoader = async () => {
       dispatch(setAuthModal(false));
       await dispatch(fetchAsyncGetMyProf());
-      await dispatch(fetchAsyncGetPosts());
+      await dispatch(setPosts(posts));
       await dispatch(fetchAsyncGetProfs());
       await dispatch(fetchAsyncGetComments());
     };
     fetchBootLoader();
   }, [dispatch]);
-
+  console.log("posts4", posts[3].liked);
+  console.log("postsState4", postsState[3]?.liked);
   return (
     <div>
       <Grid container spacing={4}>
-        {posts
+        {postsState
           .slice(0)
           .reverse()
           .map((post) => (
@@ -48,3 +51,12 @@ const IndexPage: React.FC = () => {
 };
 
 export default IndexPage;
+
+export const getStaticProps: GetStaticProps = async () => {
+  const posts = await getAllPosts();
+  return {
+    props: {
+      posts,
+    },
+  };
+};

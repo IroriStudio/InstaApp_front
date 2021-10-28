@@ -1,0 +1,5 @@
+.header_progress {
+  position: fixed;
+  top: 1rem;
+  z-index: 5;
+}

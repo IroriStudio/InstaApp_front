@@ -17,10 +17,6 @@ import {
   setAuthModal,
 } from "../../stores/slices/authSlice";
 import { AppDispatch } from "../../stores";
-import {
-  fetchAsyncGetComments,
-  fetchAsyncGetPosts,
-} from "../../stores/slices/postSlice";
 import Spacer from "../atoms/Spacer";
 import AuthButton from "../atoms/AuthButton";
 
@@ -35,10 +31,7 @@ const AuthForm: React.FC = () => {
       const res = await dispatch(fetchAsyncLogin(values));
       if (fetchAsyncLogin.fulfilled.match(res)) {
         await dispatch(fetchAsyncGetProfs());
-        await dispatch(fetchAsyncGetPosts());
-        await dispatch(fetchAsyncGetComments());
         await dispatch(fetchAsyncGetMyProf());
-
         dispatch(setAuthModal(false));
       } else if (fetchAsyncLogin.rejected.match(res)) {
         alert("login failed");
@@ -48,11 +41,7 @@ const AuthForm: React.FC = () => {
       if (fetchAsyncRegister.fulfilled.match(res)) {
         await dispatch(fetchAsyncLogin(values));
         await dispatch(fetchAsyncCreateProf({ nickName: "anonymous" }));
-        await dispatch(fetchAsyncGetProfs());
-        await dispatch(fetchAsyncGetPosts());
-        await dispatch(fetchAsyncGetComments());
         await dispatch(fetchAsyncGetMyProf());
-
         dispatch(setAuthModal(false));
       } else if (fetchAsyncRegister.rejected.match(res)) {
         alert("register failed");

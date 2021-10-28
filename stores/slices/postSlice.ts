@@ -1,20 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
 import { RootState } from "..";
-import {
-  POST_COMMENT,
-  PROPS_LIKED,
-  PROPS_NEWPOST,
-  PROPS_POST_ID,
-} from "../types";
+import { POST_COMMENT, PROPS_LIKED, PROPS_NEWPOST } from "../types";
 
 export const apiUrlPost = `${process.env.NEXT_PUBLIC_DEV_API_URL}api/post/`;
 export const apiUrlComment = `${process.env.NEXT_PUBLIC_DEV_API_URL}api/comment/`;
-
-export const fetchAsyncGetPosts = createAsyncThunk("post/get", async () => {
-  const res = await axios.get(apiUrlPost);
-  return res.data;
-});
 
 export const fetchAsyncNewPost = createAsyncThunk(
   "post/post",
@@ -148,6 +138,9 @@ export const postSlice = createSlice({
     resetOpenNewPost(state) {
       state.openNewPost = false;
     },
+    setPosts(state, action) {
+      state.posts = action.payload;
+    },
     setPost(state, action) {
       state.post = action.payload;
     },
@@ -163,12 +156,6 @@ export const postSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchAsyncGetPosts.fulfilled, (state, action) => {
-      return {
-        ...state,
-        posts: action.payload,
-      };
-    });
     builder.addCase(fetchAsyncNewPost.fulfilled, (state, action) => {
       return {
         ...state,
@@ -220,6 +207,7 @@ export const {
   fetchPostEnd,
   setOpenNewPost,
   resetOpenNewPost,
+  setPosts,
   setPost,
   resetPost,
 } = postSlice.actions;
