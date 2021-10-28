@@ -13,6 +13,7 @@ const Header: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const profile = useSelector(selectProfile);
   const isLoadingPage = useSelector(selectIsLoadingPage);
+  console.log(isLoadingPage);
 
   return (
     <header>
