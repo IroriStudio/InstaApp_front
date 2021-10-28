@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CircularProgress, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import {
   fetchAsyncGetMyProf,
   fetchAsyncGetProfs,
@@ -10,17 +10,14 @@ import {
 import {
   fetchAsyncGetComments,
   fetchAsyncGetPosts,
-  selectIsLoadingPage,
   selectPosts,
 } from "../stores/slices/postSlice";
 
 import Post from "../components/templates/Post";
 import { AppDispatch } from "../stores";
-import styles from "./index.module.css";
 
 const IndexPage: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
-  const isLoadingPage = useSelector(selectIsLoadingPage);
   const posts = useSelector(selectPosts);
 
   useEffect(() => {
@@ -36,11 +33,6 @@ const IndexPage: React.FC = () => {
 
   return (
     <div>
-      {isLoadingPage && (
-        <div className={styles.header_progress}>
-          <CircularProgress />
-        </div>
-      )}
       <Grid container spacing={4}>
         {posts
           .slice(0)

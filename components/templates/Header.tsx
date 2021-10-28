@@ -12,6 +12,7 @@ import styles from "./Header.module.css";
 const Header: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const profile = useSelector(selectProfile);
+  const isLoadingPage = useSelector(selectIsLoadingPage);
 
   return (
     <header>
@@ -21,6 +22,11 @@ const Header: React.FC = () => {
             <h1>Irostagram</h1>
           </a>
         </Link>
+        {isLoadingPage && (
+          <div className={styles.header_progress}>
+            <CircularProgress />
+          </div>
+        )}
 
         {profile?.nickName ? (
           <MyMenu />
