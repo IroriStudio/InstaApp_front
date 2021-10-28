@@ -25,9 +25,9 @@ const customStyles = {
   },
 };
 const AuthModal: React.FC = () => {
+  const dispatch: AppDispatch = useDispatch();
   Modal.setAppElement("#__next");
   const isOpenAuthModal = useSelector(selectIsOpenAuthModal);
-  const dispatch: AppDispatch = useDispatch();
 
   return (
     <div>
