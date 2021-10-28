@@ -33,7 +33,6 @@ const NewPost: React.FC = () => {
   const openNewPost = useSelector(selectOpenNewPost);
   const [image, setImage] = useState<File | null>(null);
   const [title, setTitle] = useState<string>("");
-  const [postUrl, setPostrUrl] = useState<string>(null);
 
   const onClickButton = () => {
     const fileInput = document.getElementById("imageInput");
@@ -107,7 +106,7 @@ const NewPost: React.FC = () => {
           <div>
             <img
               id="preview"
-              src={postUrl}
+              src={""}
               style={{
                 objectFit: "contain",
                 border: "none",
