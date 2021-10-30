@@ -96,7 +96,6 @@ const AuthForm: React.FC = () => {
                 onBlur={handleBlur}
                 value={values.email}
               />
-
               {touched.email && errors.email && (
                 <div className={styles.auth_error}>{errors.email}</div>
               )}
