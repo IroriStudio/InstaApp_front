@@ -147,6 +147,7 @@ const Post: React.FC<Props> = ({ fetchedPost }) => {
   );
 };
 export default Post;
+
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { post } = await getPostById(params.id);
 
