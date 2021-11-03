@@ -1,12 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
 import { RootState } from "..";
-import {
-  POST_COMMENT,
-  PROPS_LIKED,
-  PROPS_NEWPOST,
-  PROPS_POST_ID,
-} from "../types";
+import { POST_COMMENT, PROPS_LIKED, PROPS_NEWPOST } from "../types";
 
 export const apiUrlPost = `${process.env.NEXT_PUBLIC_DEV_API_URL}api/post/`;
 export const apiUrlComment = `${process.env.NEXT_PUBLIC_DEV_API_URL}api/comment/`;
