@@ -1,18 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
 import { RootState } from "..";
-import {
-  POST_COMMENT,
-  PROPS_LIKED,
-  PROPS_NEWPOST,
-  PROPS_POST_ID,
-} from "../types";
+import { POST_COMMENT, PROPS_LIKED, PROPS_NEWPOST } from "../types";
 
 export const apiUrlPost = `${process.env.NEXT_PUBLIC_DEV_API_URL}api/post/`;
 export const apiUrlComment = `${process.env.NEXT_PUBLIC_DEV_API_URL}api/comment/`;
 
 export const fetchAsyncGetPosts = createAsyncThunk("post/get", async () => {
   const res = await axios.get(apiUrlPost);
+
   return res.data;
 });
 
@@ -27,6 +23,7 @@ export const fetchAsyncNewPost = createAsyncThunk(
         Authorization: `JWT ${localStorage.localJWT}`,
       },
     });
+
     return res.data;
   }
 );
@@ -38,6 +35,7 @@ export const fetchAsyncPostDelete = createAsyncThunk(
         Authorization: `JWT ${localStorage.localJWT}`,
       },
     });
+
     return postId;
   }
 );
@@ -85,6 +83,7 @@ export const fetchAsyncGetComments = createAsyncThunk(
     const res = await axios.get(apiUrlComment, {
       headers: { Authorization: `JWT ${localStorage.localJWT}` },
     });
+
     return res.data;
   }
 );
@@ -95,6 +94,7 @@ export const fetchAsyncPostComment = createAsyncThunk(
     const res = await axios.post(apiUrlComment, comment, {
       headers: { Authorization: `JWT ${localStorage.localJWT}` },
     });
+
     return res.data;
   }
 );
@@ -106,6 +106,7 @@ export const fetchAsyncDeleteComment = createAsyncThunk(
         Authorization: `JWT ${localStorage.localJWT}`,
       },
     });
+
     return commentId;
   }
 );

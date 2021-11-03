@@ -36,7 +36,8 @@ const PostMenu: React.FC<Props> = ({ checked, onClickGood, post }) => {
   };
 
   const isMyPost = profile?.userProfile === post?.userPost;
-  return (
+  
+return (
     <div>
       <IconButton aria-label="settings" onClick={handleClickMenu}>
         <MoreVertIcon />

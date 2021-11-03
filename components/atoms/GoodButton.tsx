@@ -12,7 +12,8 @@ interface Props {
 const GoodButton: React.FC<Props> = ({ checked, onClickGood }) => {
   const profile = useSelector(selectProfile);
   const isChecked = profile.nickName == "" ? false : checked;
-  return (
+  
+return (
     <Checkbox
       icon={<FavoriteBorder />}
       checkedIcon={<Favorite />}

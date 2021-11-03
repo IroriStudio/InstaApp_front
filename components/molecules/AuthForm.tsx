@@ -60,7 +60,8 @@ const AuthForm: React.FC = () => {
     }
     dispatch(fetchCredEnd());
   };
-  return (
+  
+return (
     <Formik
       initialErrors={{ email: "required" }}
       initialValues={{ email: "", password: "" }}
@@ -96,7 +97,6 @@ const AuthForm: React.FC = () => {
                 onBlur={handleBlur}
                 value={values.email}
               />
-
               {touched.email && errors.email && (
                 <div className={styles.auth_error}>{errors.email}</div>
               )}

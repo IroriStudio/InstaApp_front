@@ -32,6 +32,7 @@ export const fetchAsyncRegister = createAsyncThunk(
         "Content-Type": "application/json",
       },
     });
+
     return res.data;
   }
 );
@@ -63,6 +64,7 @@ export const fetchAsyncUpdateProf = createAsyncThunk(
         },
       }
     );
+
     return res.data;
   }
 );

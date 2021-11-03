@@ -7,15 +7,14 @@ import NewPost from "./organisms/NewPostModal";
 
 interface Props {
   children?: ReactNode;
+  title: string;
 }
 
-const Layout: React.FC<Props> = ({ children }) => {
+const Layout: React.FC<Props> = ({ children, title }) => {
   return (
     <>
       <Head>
-        <title>Irostagram</title>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <title>{title}</title>
       </Head>
       <Header />
       <EditProfile />

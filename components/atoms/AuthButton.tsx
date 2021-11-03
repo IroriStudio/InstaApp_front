@@ -9,7 +9,8 @@ interface Props {
 
 const AuthButton: React.FC<Props> = ({ disabled }) => {
   const authMode = useSelector(selectAuthMode);
-  return (
+  
+return (
     <Button
       disabled={disabled}
       variant="contained"

@@ -11,7 +11,8 @@ const Post: React.FC<Props> = ({ post }) => {
   if (post?.img) {
     return <PostCard post={post} />;
   }
-  return <LoadingPostCard />;
+  
+return <LoadingPostCard />;
 };
 
 export default Post;

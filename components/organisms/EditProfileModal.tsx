@@ -59,7 +59,8 @@ const EditProfile: React.FC = () => {
   const imageHander = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files === null) {
       setImage(null);
-      return;
+      
+return;
     }
     const file = e.target.files![0];
     setImage(file);
@@ -80,7 +81,8 @@ const EditProfile: React.FC = () => {
     setImage(null);
     dispatch(resetOpenProfile());
   };
-  return (
+  
+return (
     <>
       <Modal
         isOpen={openProfile}

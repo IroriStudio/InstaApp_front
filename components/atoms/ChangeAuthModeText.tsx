@@ -7,7 +7,8 @@ import { selectAuthMode, changeAuthMode } from "../../stores/slices/authSlice";
 const ChangeAuthModeText: React.FC = () => {
   const authMode = useSelector(selectAuthMode);
   const dispatch: AppDispatch = useDispatch();
-  return (
+  
+return (
     <a
       className={styles.change_auth_mode_text}
       onClick={() => {

@@ -22,6 +22,7 @@ import {
   fetchPageEnd,
   selectComments,
 } from "../../stores/slices/postSlice";
+import Layout from "../../components/Layout";
 import GoodButton from "../../components/atoms/GoodButton";
 import PostMenu from "../../components/molecules/PostMenu";
 import { AppDispatch } from "../../stores";
@@ -68,82 +69,85 @@ const Post: React.FC<Props> = ({ fetchedPost }) => {
   const isLikedChecked = liked.some((like) => like === loginId);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-      }}
-    >
-      <Grid item md={6}>
-        <Card>
-          <CardHeader
-            avatar={<Avatar alt="my avatar" src={postProfile?.img} />}
-            action={
-              <PostMenu
-                post={postState}
-                checked={isLikedChecked}
-                onClickGood={async () => {
-                  await onClickGood(packet, profile, dispatch);
-                }}
-              />
-            }
-            title={postProfile?.nickName}
-            subheader={created_on}
-          />
-          {img && (
-            <Image
-              src={img}
-              alt="image"
-              width={1000}
-              height={600}
-              objectFit="contain"
+    <Layout title={title}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Grid item md={6}>
+          <Card>
+            <CardHeader
+              avatar={<Avatar alt="my avatar" src={postProfile?.img} />}
+              action={
+                <PostMenu
+                  post={postState}
+                  checked={isLikedChecked}
+                  onClickGood={async () => {
+                    await onClickGood(packet, profile, dispatch);
+                  }}
+                />
+              }
+              title={postProfile?.nickName}
+              subheader={created_on}
             />
-          )}
-          <CardContent>
-            <div style={{ display: "flex" }}>
-              <p>
-                <strong>{postProfile?.nickName}</strong>
-              </p>
-              <p>{title}</p>
-            </div>
-            <div style={{ display: "flex", zIndex: 0 }}>
-              <GoodButton
-                checked={isLikedChecked}
-                onClickGood={async () => {
-                  await onClickGood(packet, profile, dispatch);
-                }}
+            {img && (
+              <Image
+                src={img}
+                alt="image"
+                width={1000}
+                height={600}
+                objectFit="contain"
               />
-              <AvatarGroup max={3}>
-                {liked.map((like) => (
-                  <Avatar
-                    key={like}
-                    src={
-                      profiles.find((prof) => prof.userProfile === like)?.img
-                    }
-                    style={{
-                      height: "1.8rem",
-                      width: "1.8rem",
-                      marginTop: "0rem",
-                      zIndex: 0,
-                    }}
-                  />
-                ))}
-              </AvatarGroup>
-              <Typography mt={0.7} mb={0.7} ml={2}>
-                {liked.length > 0
-                  ? `liked by ${liked.length} people`
-                  : "Be the first to like this"}
-              </Typography>
-            </div>
-            <Comments comments={commentsOnPost} />
-            <CommentInput post={postState} />
-          </CardContent>
-        </Card>
-      </Grid>
-    </div>
+            )}
+            <CardContent>
+              <div style={{ display: "flex" }}>
+                <Typography mt={1} mr={1}>
+                  <strong>{postProfile?.nickName}</strong>
+                </Typography>
+                <Typography mt={1}>{title}</Typography>
+              </div>
+              <div style={{ display: "flex", zIndex: 0 }}>
+                <GoodButton
+                  checked={isLikedChecked}
+                  onClickGood={async () => {
+                    await onClickGood(packet, profile, dispatch);
+                  }}
+                />
+                <AvatarGroup max={3}>
+                  {liked.map((like) => (
+                    <Avatar
+                      key={like}
+                      src={
+                        profiles.find((prof) => prof.userProfile === like)?.img
+                      }
+                      style={{
+                        height: "1.8rem",
+                        width: "1.8rem",
+                        marginTop: "0rem",
+                        zIndex: 0,
+                      }}
+                    />
+                  ))}
+                </AvatarGroup>
+                <Typography mt={0.7} mb={0.7} ml={2}>
+                  {liked.length > 0
+                    ? `liked by ${liked.length} people`
+                    : "Be the first to like this"}
+                </Typography>
+              </div>
+              <Comments comments={commentsOnPost} />
+              <CommentInput post={postState} />
+            </CardContent>
+          </Card>
+        </Grid>
+      </div>
+    </Layout>
   );
 };
 export default Post;
+
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { post } = await getPostById(params.id);
 
@@ -155,7 +159,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await getAllPostIds();
-  return {
+  
+return {
     paths,
     fallback: false,
   };

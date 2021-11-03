@@ -10,11 +10,13 @@ import { setAuthModal } from "../stores/slices/authSlice";
 
 export const getAllPosts = async () => {
   const posts = await axios.get(apiUrlPost);
+
   return posts.data;
 };
 
 export const getAllPostIds = async () => {
   const res = await getAllPosts();
+
   return res.map((post) => {
     return {
       params: {
