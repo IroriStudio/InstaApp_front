@@ -34,13 +34,14 @@ const EditProfile: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const openProfile = useSelector(selectOpenProfile);
   const profile = useSelector(selectProfile);
-  const [nickName, setNickname] = useState<string>(profile?.nickName);
-  const [image, setImage] = useState<File | null>(null);
-  const [avatarUrl, setAvatarUrl] = useState<string>(profile?.img);
+  const [nickName, setNickname] = useState(profile?.nickName);
+  const [image, setImage] = useState(null);
+  const [avatarUrl, setAvatarUrl] = useState(profile?.img);
 
   useEffect(() => {
     setNickname(profile?.nickName);
     setAvatarUrl(profile?.img);
+    setImage(profile?.img);
   }, [profile]);
 
   const updateProfile = async (e: React.MouseEvent<HTMLElement>) => {
@@ -77,8 +78,6 @@ const EditProfile: React.FC = () => {
   };
 
   const ModalClose = () => {
-    setNickname("");
-    setImage(null);
     dispatch(resetOpenProfile());
   };
 

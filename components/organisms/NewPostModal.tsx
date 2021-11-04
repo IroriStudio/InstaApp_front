@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
 import { Button, IconButton, TextField } from "@mui/material";
 import React, { ChangeEvent, useState } from "react";
@@ -104,19 +105,13 @@ const NewPost: React.FC = () => {
           />
 
           <div>
-            {image && (
-              // eslint-disable-next-line
-              <img
-                id="preview"
-                src={""}
-                style={{
-                  objectFit: "contain",
-                  border: "none",
-                }}
-                hidden={false}
-              />
-            )}
-
+            <img
+              id="preview"
+              style={{
+                objectFit: "contain",
+                border: "none",
+              }}
+            />
             <div style={{ width: "100%" }}>
               <IconButton onClick={onClickButton}>
                 <MdAddAPhoto />
