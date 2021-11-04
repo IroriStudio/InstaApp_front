@@ -59,8 +59,8 @@ const EditProfile: React.FC = () => {
   const imageHander = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files === null) {
       setImage(null);
-      
-return;
+
+      return;
     }
     const file = e.target.files![0];
     setImage(file);
@@ -81,8 +81,8 @@ return;
     setImage(null);
     dispatch(resetOpenProfile());
   };
-  
-return (
+
+  return (
     <>
       <Modal
         isOpen={openProfile}
@@ -108,6 +108,7 @@ return (
           />
           <div>
             {image ? (
+              // eslint-disable-next-line
               <img
                 id="preview"
                 src={avatarUrl}
@@ -121,6 +122,7 @@ return (
                 hidden={image ? true : false}
               />
             ) : (
+              // eslint-disable-next-line
               <img id="preview" />
             )}
             <div style={{ width: "100%" }}>

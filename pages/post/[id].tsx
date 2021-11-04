@@ -43,7 +43,7 @@ const Post: React.FC<Props> = ({ fetchedPost }) => {
     dispatch(fetchAsyncGetProfs());
     dispatch(fetchAsyncGetMyProf());
     dispatch(fetchPageEnd());
-  }, [dispatch]);
+  }, [dispatch, fetchedPost]);
 
   const postState = useSelector(selectPost);
   const profiles = useSelector(selectProfiles);
@@ -159,8 +159,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await getAllPostIds();
-  
-return {
+
+  return {
     paths,
     fallback: false,
   };

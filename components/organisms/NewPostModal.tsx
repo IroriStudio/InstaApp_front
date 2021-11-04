@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Button, IconButton, TextField } from "@mui/material";
 import React, { ChangeEvent, useState } from "react";
 import { MdAddAPhoto } from "react-icons/md";
@@ -83,7 +84,6 @@ const NewPost: React.FC = () => {
       >
         <form style={{ textAlign: "center" }}>
           <h1 className={styles.modal_title}>Irostagram</h1>
-
           <br />
           <TextField
             placeholder="Set a title"
@@ -104,15 +104,19 @@ const NewPost: React.FC = () => {
           />
 
           <div>
-            <img
-              id="preview"
-              src={""}
-              style={{
-                objectFit: "contain",
-                border: "none",
-              }}
-              hidden={false}
-            />
+            {image && (
+              // eslint-disable-next-line
+              <img
+                id="preview"
+                src={""}
+                style={{
+                  objectFit: "contain",
+                  border: "none",
+                }}
+                hidden={false}
+              />
+            )}
+
             <div style={{ width: "100%" }}>
               <IconButton onClick={onClickButton}>
                 <MdAddAPhoto />
@@ -120,6 +124,7 @@ const NewPost: React.FC = () => {
             </div>
           </div>
           <br />
+
           <Button
             disabled={!title || !image}
             variant="contained"
