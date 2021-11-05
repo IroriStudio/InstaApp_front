@@ -97,12 +97,14 @@ const Post: React.FC<Props> = ({ fetchedPost }) => {
               <div>Loading...</div>
             ) : (
               img && (
-                <Image
+                <img
                   src={img}
                   alt="image"
                   width={1000}
                   height={600}
-                  objectFit="contain"
+                  style={{
+                    objectFit: "contain",
+                  }}
                 />
               )
             )}
