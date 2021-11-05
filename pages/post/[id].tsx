@@ -98,6 +98,7 @@ const Post = ({ post }: Props) => {
                 width={1000}
                 height={600}
                 objectFit="contain"
+                priority={true}
               />
             ) : (
               <></>
