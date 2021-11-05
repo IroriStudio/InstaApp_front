@@ -30,6 +30,7 @@ import { fetchAsyncGetProfs } from "../../stores/slices/authSlice";
 import Comments from "../../components/molecules/Comments";
 import CommentInput from "../../components/molecules/CommentInput";
 import { PROPS_POST } from "../../stores/types";
+import { useRouter } from "next/router";
 
 interface Props {
   fetchedPost: PROPS_POST;
@@ -37,7 +38,7 @@ interface Props {
 
 const Post: React.FC<Props> = ({ fetchedPost }) => {
   const dispatch: AppDispatch = useDispatch();
-
+  const router = useRouter();
   useEffect(() => {
     dispatch(setPost(fetchedPost));
     dispatch(fetchAsyncGetProfs());
@@ -92,15 +93,20 @@ const Post: React.FC<Props> = ({ fetchedPost }) => {
               title={postProfile?.nickName}
               subheader={created_on}
             />
-            {img && (
-              <Image
-                src={img}
-                alt="image"
-                width={1000}
-                height={600}
-                objectFit="contain"
-              />
+            {router.isFallback ? (
+              <div>Loading...</div>
+            ) : (
+              img && (
+                <Image
+                  src={img}
+                  alt="image"
+                  width={1000}
+                  height={600}
+                  objectFit="contain"
+                />
+              )
             )}
+
             <CardContent>
               <div style={{ display: "flex" }}>
                 <Typography mt={1} mr={1}>
