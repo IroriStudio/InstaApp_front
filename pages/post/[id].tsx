@@ -33,30 +33,27 @@ import { PROPS_POST } from "../../stores/types";
 import { useRouter } from "next/router";
 
 interface Props {
-  fetchedPost: PROPS_POST;
+  post: PROPS_POST;
 }
 
-const Post: React.FC<Props> = ({ fetchedPost }) => {
+const Post = ({ post }: Props) => {
   const dispatch: AppDispatch = useDispatch();
   const router = useRouter();
   useEffect(() => {
-    dispatch(setPost(fetchedPost));
+    dispatch(setPost(post));
     dispatch(fetchAsyncGetProfs());
     dispatch(fetchAsyncGetMyProf());
     dispatch(fetchPageEnd());
-  }, [dispatch, fetchedPost]);
-
+  }, [dispatch, post]);
   const postState = useSelector(selectPost);
   const profiles = useSelector(selectProfiles);
   const comments = useSelector(selectComments);
   const profile = useSelector(selectProfile);
   const loginId = profile.userProfile;
 
-  const { id, title, userPost, created_on, img, liked } = postState;
-  console.log("img", img);
-  const postProfile = profiles.filter((prof) => {
-    return prof.userProfile === userPost;
-  })[0];
+  const { id, title, userPost, created_on, img, liked } = post;
+
+  const postProfile = profiles.find((prof) => prof.userProfile === userPost);
 
   const packet = {
     id: id,
@@ -94,17 +91,16 @@ const Post: React.FC<Props> = ({ fetchedPost }) => {
               subheader={created_on}
             />
 
-            {img && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
+            {img ? (
+              <Image
                 src={img}
                 alt="image"
                 width={1000}
                 height={600}
-                style={{
-                  objectFit: "contain",
-                }}
+                objectFit="contain"
               />
+            ) : (
+              <></>
             )}
 
             <CardContent>
@@ -158,7 +154,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { post } = await getPostById(params.id);
 
   return {
-    props: { fetchedPost: post },
+    props: { post },
     revalidate: 1,
   };
 };
