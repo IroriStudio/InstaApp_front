@@ -53,7 +53,7 @@ const Post: React.FC<Props> = ({ fetchedPost }) => {
   const loginId = profile.userProfile;
 
   const { id, title, userPost, created_on, img, liked } = postState;
-
+  console.log("img", img);
   const postProfile = profiles.filter((prof) => {
     return prof.userProfile === userPost;
   })[0];
@@ -93,20 +93,18 @@ const Post: React.FC<Props> = ({ fetchedPost }) => {
               title={postProfile?.nickName}
               subheader={created_on}
             />
-            {router.isFallback ? (
-              <div>Loading...</div>
-            ) : (
-              img && (
-                <img
-                  src={img}
-                  alt="image"
-                  width={1000}
-                  height={600}
-                  style={{
-                    objectFit: "contain",
-                  }}
-                />
-              )
+
+            {img && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={img}
+                alt="image"
+                width={1000}
+                height={600}
+                style={{
+                  objectFit: "contain",
+                }}
+              />
             )}
 
             <CardContent>
