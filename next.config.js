@@ -1,5 +1,5 @@
 module.exports = {
   images: {
-    domains: ["insta-app-front.vercel.app"],
+    domains: ["irostagram-media.s3.amazonaws.com"],
   },
 };
