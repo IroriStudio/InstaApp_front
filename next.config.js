@@ -1,5 +1,5 @@
 module.exports = {
   images: {
-    domain: ["https://insta-app-front.vercel.app"],
+    domains: ["insta-app-front.vercel.app"],
   },
 };
